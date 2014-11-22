@@ -27,26 +27,25 @@ app.controller('CommentsController', function ($scope, $location, commentsFactor
 
 	$scope.updateComment = function(i) {
 		var id = $scope.comments[i]._id;
+		console.log(id);
 		commentsFactory.update({commentId: id}, $scope.comments[i], function (result) {
-			$scope.comments.push(result);
+			console.log(result);
+			// $scope.comments.push(result);
 		});
 	};
 
 	$scope.removeComments = function() {
 		comments = $scope.comments;
 		commentsSelected = {
-			'ids': [
-				{ 'id': String }
+			_id: [
+
 			]
 		};
 
-		var ids = JSON.parse(commentsSelected).ids;
-
 		angular.forEach(comments, function (comment) {
-			if(comment.selected) ids.push({id: comment._id});
+			if(comment.selected) commentsSelected._id.push(comment._id);
 		});
 		
-		console.log(ids);
 		commentsFactory.delete(commentsSelected, function (result) {
 			$scope.comments.push(result);
 		});

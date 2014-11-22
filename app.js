@@ -23,51 +23,9 @@ app.use(bodyParser.urlencoded({
  	extended: true
 }));
 
-// app.post('/', function (req, res) {
-// 	title = req.body.title;
-// 	content = req.body.content;
-
-// 	db.create(title, content);
-// 	res.redirect('/');
-// });
-
-// app.post('/update/:id?', function (req, res) {
-// 	newData = {title: req.body.title, content: req.body.content};
-
-// 	db.BlogModel.findOneAndUpdate({_id: req.params.id}, newData, {upsert: true}, function(err, data){
-// 		if (err) return console.error(err);
-// 		res.redirect('/');
-// 	});
-// });
-
 app.get('/', function(req, res){
 	res.render(__dirname + '/client/views/index', {
 
-	});
-});
-
-// Edit comment route 
-app.get('/edit/:id?', function (req, res) {
-	var id = req.params.id;
-
-	// Find comment and render it in form
-	db.BlogModel.findById(id, function (err, post) {
-		if(err) return console.error(err);
-		res.render(__dirname + '/client/views/editPost', {
-			blogEntry: post
-	    });
-	});
-});
-
-// Query db for id passed in route
-app.get('/delete/:id?', function (req, res) {
-	var id = req.params.id;
-
-	// Delete comment
-	db.BlogModel.findById(id, function (err, post) {
-		if(err) return console.error(err);
-		post.remove();
-		res.redirect('/');
 	});
 });
 
@@ -95,7 +53,7 @@ app.get('/api/comments/:id', function (req, res) {
 
 // Add a comment
 app.post('/api/comments', function (req, res) {
-	
+	console.log(req.body);
 	var comment = new db.BlogModel({
 		title: req.body.title,
 		content: req.body.content
@@ -112,6 +70,7 @@ app.post('/api/comments', function (req, res) {
 	return res.send(comment);
 });
 
+// Update a comment
 app.put('/api/comments/:id', function (req, res) {
 
 	var putData = {
@@ -125,24 +84,18 @@ app.put('/api/comments/:id', function (req, res) {
 	});
 });
 
+// Delete selected comments 
 app.delete('/api/comments/', function (req, res) {
 
 	var comments = req.query;
-	console.log(comments);
+	console.log(comments._id);
 
-	// db.BlogModel.findById(comments[0].id, function (err, comment) {
-	// 	if(err) return console.error(err);
-	// 	comment.remove();
-
-	// });
-	return res.send(comments);
-	// return db.BlogModel.find(function (err, comments) {
-	// 	if (!err) {
-	// 		
-	// 	} else {
-	// 		return console.log(err);
-	// 	}
-	// });
+	db.BlogModel.find({_id: {$in: comments._id}}, function (err, comments) {
+		if(err) return console.error(err);
+		comments.forEach( function(comment) {
+			comment.remove();
+		})
+	});
 });
 
 
