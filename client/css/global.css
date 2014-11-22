@@ -4,3 +4,8 @@
 	width: 70%;
 	margin: auto;
 }
+
+.post-heading {
+	display: inline-block;
+	padding: 1rem;
+}
