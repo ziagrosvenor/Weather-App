@@ -15,10 +15,10 @@ app.controller('CommentsController', function ($scope, $location, commentsFactor
 
 	$scope.addComment = function() {
 		var comment = new commentsFactory();
-		console.log($scope.commentTitle);
 		comment.title = $scope.commentTitle;
 		comment.content = $scope.commentContent;
-
+		$scope.commentTitle = "";
+		$scope.commentContent = "";
 		comment.$save( function (result) {
 			$scope.comments.push(result);
 		});
@@ -35,19 +35,22 @@ app.controller('CommentsController', function ($scope, $location, commentsFactor
 	};
 
 	$scope.removeComments = function() {
-		comments = $scope.comments;
+		var oldComments = $scope.comments;
+		$scope.comments = [];
 		commentsSelected = {
 			_id: [
 
 			]
 		};
 
-		angular.forEach(comments, function (comment) {
+
+		angular.forEach(oldComments, function (comment) {
 			if(comment.selected) commentsSelected._id.push(comment._id);
+			if(!comment.selected) $scope.comments.push(comment);
 		});
 		
 		commentsFactory.delete(commentsSelected, function (result) {
-			$scope.comments.push(result);
+			
 		});
 	};
 });

@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function(req, res){
-	res.render(__dirname + '/client/views/index', {
+	res.render(__dirname + '/client/views/jade/index', {
 
 	});
 });
@@ -49,6 +49,7 @@ app.put('/api/comments/:id', commentsCtrl.update);
 // Delete selected comments 
 app.delete('/api/comments/', commentsCtrl.delete);
 
+
 var server = app.listen(3000, function(){
-	console.log('listening on port 3000');
+	console.log('listening on port 3000 ...');
 });

@@ -17,10 +17,24 @@ module.exports = function(grunt) {
         target: ['./client/js/app.js', 'app.js', 'Gruntfile.js']
     },
 
+    jade: {
+      compile: {
+        options: {
+          pretty: true,
+          data: {
+            debug: true
+          }
+        },
+        files: {
+          './client/views/html/list.html': './client/views/jade/list.jade'
+        }
+      }
+    },
+
     watch: {
       options: {
         // Start another live reload server on port 1337
-        livereload: 3000
+        livereload: 35729
       },
 
       scripts: {
@@ -29,22 +43,11 @@ module.exports = function(grunt) {
         options: {
           event: ['added', 'changed'],
         },
-      }
+      },
 
-      // prefixer: {
-      //   files: 'sass/*scss',
-      //   tasks: ['autoprefixer'],
-      // }
-    },
-
-    express: {
-      all: {
-        options: {
-          port: 3000,
-          hostname: 'localhost',
-          bases: ['./client/'],
-          livereload: true
-        }
+      jade: {
+        files: ['./client/views/jade/*.jade'],
+        tasks: ['jade'],
       }
     }
   });
@@ -53,14 +56,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-express');
   
-
-
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'autoprefixer']);
-  grunt.registerTask('server', ['express', 'watch']);
+  grunt.registerTask('default', ['jshint', 'autoprefixer', 'jade']);
+  grunt.registerTask('server', ['watch']);
 
 };
