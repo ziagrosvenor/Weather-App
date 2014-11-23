@@ -1,5 +1,5 @@
 {
-  "name": "User comments app",
+  "name": "User-comments-grunapp",
   "version": "1.0.0",
   "description": "First go at node using express and mongo",
   "main": "app.js",
@@ -13,6 +13,17 @@
     "express": "^4.10.0",
     "jade": "^1.7.0",
     "mongo": "^0.1.0",
-    "mongoose": "^3.8.18"
+    "mongoose": "^3.8.18",
+    "grunt": "~0.4.5",
+    "grunt-autoprefixer": "^1.0.1",
+    "grunt-contrib-compass": "^1.0.1",
+    "grunt-contrib-jade": "^0.13.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-express": "^1.4.1",
+    "jshint-stylish": "^1.0.0"
   }
 }
