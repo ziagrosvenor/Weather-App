@@ -66,13 +66,11 @@ module.exports = function(db) {
 				});
 
 			});
-
 		} else {
 
 			db.BlogModel.findOneAndRemove({_id: comments._id}, function () {
 				console.log('comment removed');
 			});
-
 		}
 	};
 }

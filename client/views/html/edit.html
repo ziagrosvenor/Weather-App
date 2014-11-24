@@ -1,0 +1,14 @@
+
+<section class="edit-comment">
+  <article class="post edit-post"><a href="#/list" class="btn">&lt;</a>
+    <h2 class="post-heading">{{comments[whichItem].title}}</h2>
+    <p class="post-content">{{comments[whichItem].content}}</p>
+  </article>
+  <form ng-submit="updateComment(whichItem)" class="list-add-form module-page">
+    <label for="name">Name</label>
+    <input type="text" ng-model="comments[whichItem].title" id="name" placeholder="{{comment.title}}" class="input-flex border"/>
+    <label for="commentText">Comment</label>
+    <textarea ng-model="comments[whichItem].content" id="commentText" placeholder="{{comment.content}}" class="input-flex border"> </textarea>
+    <input type="submit" value="Save" class="btn btn-lg"/>
+  </form>
+</section>

@@ -1,2 +1,25 @@
 
-<article>jsjsijm</article>
+<section class="comments-list">
+  <div class="map border">
+    <div id="map-canvas" class="border"></div>
+  </div>
+  <h2>There are {{comments.length}} comments.</h2>
+  <div class="search-bar">
+    <label for="search">Search:</label>
+    <input type="text" ng-model="searchQuery" name="search" placeholder="Search comments" class="border"/><span><a ng-click="removeComments()" class="btn btn-sm">Remove Comments</a></span>
+  </div>
+  <article ng-animate="'animate'" ng-repeat="comment in comments | filter: searchQuery" class="comment-list module-page">
+    <label class="list-select">
+      <input type="checkbox" ng-model="comment.selected"/>
+      <h3 class="post-heading">{{comment.title}}</h3>
+    </label>
+    <p class="comment-content">{{comment.content}}</p><a href="#/edit/{{comments.indexOf(comment)}}" class="btn btn-sm">Edit Comment</a>
+  </article>
+  <form ng-submit="postComment()" class="list-add-form module-page">
+    <label for="name">Name</label>
+    <input type="text" ng-model="addTitle" id="name" class="input-flex border"/>
+    <label for="commentText">Comment</label>
+    <textarea ng-model="addContent" id="addContent" placeholder="Your comment..." class="input-flex border"></textarea>
+    <input type="submit" value="Add Comment" class="btn btn-lg"/>
+  </form>
+</section>

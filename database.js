@@ -4,6 +4,8 @@ module.exports = function() {
 	this.BlogModel;
 	this.LocationSchema;
 	this.LocationModel;
+	this.WeatherSchema;
+	this.WeatherModel;
 
 	this.configDb = function(){
 		// Require mongoose module
@@ -27,9 +29,33 @@ module.exports = function() {
 			lat: Number,
 			lng: Number
 		});
+		this.WeatherSchema = new Schema({
+			location: String,
+			country: String,
+			lat: Number,
+			lng: Number,
+			period: [{
+				date: String,
+				dayTime: {
+					weatherType: Number,
+					temp: Number,
+					windDir: String,
+					windSpeed: Number,
+					rainChance: Number,
+				},
+				nightTime: {
+					weatherType: Number,
+					temp: Number,
+					windDir: String,
+					windSpeed: Number,
+					rainChance: Number,
+				}
+			}]
+		});
 		// Creates a model named Blog with this.Schema as its schema
 		// Assign it to the BlogModel property
 		this.BlogModel = Mongoose.model('Blog', this.BlogSchema);
 		this.LocationModel = Mongoose.model('MetData', this.LocationSchema);
+		this.WeatherModel = Mongoose.model('WeatherData', this.WeatherSchema);
 	};
 }

@@ -1,0 +1,109 @@
+.border {
+	border: 0.1rem solid rgba(black, 0.4);
+	border-radius: 0.2rem;
+}
+
+.module-page {
+	padding: 1.5rem;
+	margin: 1rem 0;
+	@extend .border;
+	background-color: white;
+}	
+
+.post-content {
+	padding: 1rem 0.5rem;
+
+}
+
+.edit-post {
+	margin-top: 2rem;
+
+	a {
+		text-decoration: none;
+	}
+}
+
+.map {
+	padding: 3rem;
+	background-color: $dark-blue;
+}
+
+#map-canvas {
+	width: 100%;
+	height: 25rem;
+}
+
+.comment-list {
+	transition: all 0.3s ease-out;
+}
+.comment-list.ng-enter.ng-enter-active,
+.comment-list.ng-leave {
+	opacity: 1;
+	padding: 1.5rem;
+	height: auto;
+}
+
+.comment-list.ng-leave.ng-leave-active {
+	opacity: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+}
+// Forms ----------------------------------------------------------------------
+@import "modules/forms";
+
+.list-add-form {
+	label, .input-flex {
+		width: 100%;
+		font-size: 1.4rem;
+	}
+
+	label {
+		margin-bottom: 0.5rem;
+	}
+
+	.input-flex {
+		box-sizing: border-box;
+		margin-bottom: 2rem;
+		padding: 1rem;
+	}
+	
+	textarea {
+		height: 10rem;
+	}
+}
+
+.search-bar {
+	padding: 1rem;
+	input {
+		width: 40%;
+		margin: 0 1rem 0 0;
+		padding: 0.5rem;
+	}
+}
+
+.post-heading {
+	display: inline;
+	font-weight: bold;
+	padding: 0 0.5rem;
+	border-bottom: 2rem;
+}
+
+.comment-content {
+	padding: 1rem 0;
+}
+// Buttons
+
+@import "modules/buttons";
+
+.btn {
+	background-color: $dark-blue;
+	color: white;
+	transition: all 0.15s ease-out;
+	text-decoration: none;
+
+	&:hover {
+		color: white;
+		transform: scale(1.1);
+	}
+}

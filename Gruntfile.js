@@ -13,8 +13,19 @@ module.exports = function(grunt) {
       },
     },
 
+    compass: {
+      dev: {
+        options: {
+          sassDir: './sass',
+          cssDir: './client/css',
+          outputStyle: 'expanded',
+          noLineComments: true
+        }
+      }
+    },
+
     jshint: {
-        target: ['./client/js/app.js', 'app.js', 'Gruntfile.js']
+        target: ['./client/js/*.js', 'app.js', 'Gruntfile.js']
     },
 
     jade: {
@@ -26,23 +37,34 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          './client/views/html/list.html': './client/views/jade/list.jade'
+          './client/views/html/list.html': './client/views/jade/list.jade',
+          './client/views/html/add.html': './client/views/jade/add.jade',
+          './client/views/html/edit.html': './client/views/jade/edit.jade'
         }
       }
     },
 
     watch: {
       options: {
-        // Start another live reload server on port 1337
         livereload: 35729
       },
 
       scripts: {
-        files: ['./client/js/app.js', 'app.js'],
+        files: ['./client/js/*.js', 'app.js'],
         tasks: ['jshint'],
         options: {
           event: ['added', 'changed'],
         },
+      },
+
+      compass: {
+        files: ['./sass/*.scss'],
+        tasks: ['compass'],
+      },
+
+      prefixr: {
+        files: ['./sass/*.scss'],
+        tasks: ['autoprefixer'],
       },
 
       jade: {
@@ -53,13 +75,14 @@ module.exports = function(grunt) {
   });
 
   // Load the plugin that provides the "uglify" task.
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'autoprefixer', 'jade']);
+  grunt.registerTask('default', ['compass', 'jshint', 'autoprefixer', 'jade']);
   grunt.registerTask('server', ['watch']);
 
 };

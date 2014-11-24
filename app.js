@@ -16,7 +16,8 @@ var app = express();
 
 app.set('view engine', 'jade');
 
-// Route for CSS and JS
+// Routes for asset requests
+app.use('/', express.static(__dirname + '/client'));
 app.use('/js', express.static(__dirname + '/client/js'));
 app.use('/css', express.static(__dirname + '/client/css'));
 
@@ -34,7 +35,14 @@ app.get('/', function(req, res){
 	});
 });
 
-// Read all comments
+// Read map data
+app.get('/api/map', function (req, res ) {
+	db.WeatherModel.find( function (err, data) {
+		res.send(data);
+	});
+});
+
+// Return all comments
 app.get('/api/comments', commentsCtrl.read);
 
 // Read comment by ID
