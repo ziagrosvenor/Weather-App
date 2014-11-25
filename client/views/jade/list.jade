@@ -1,6 +1,7 @@
 section.comments-list
 	.map.border
 		#map-canvas.border
+	div(ui-slider min="0" max="200" ng-model="slider")
 	h2 There are {{comments.length}} comments.
 	.search-bar
 		label(for="search") Search:
@@ -21,3 +22,7 @@ section.comments-list
 		textarea(ng-model="addContent" id="addContent" class="input-flex border" placeholder="Your comment...")
 		//- a(href="#/list")
 		input(type="submit" class="btn btn-lg" value="Add Comment")
+	script(src="https://maps.googleapis.com/maps/api/js?sensor=false")
+	script(src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+	script(src="js/jquery-ui.js")
+	script(src="js/global.js")

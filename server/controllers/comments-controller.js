@@ -59,13 +59,12 @@ module.exports = function(db) {
 
 			db.BlogModel.find({_id: {$in: comments._id}}, function (err, comments) {
 				if(err) return console.error(err);
-
 				comments.forEach( function(comment) {
 					comment.remove();
 					console.log('comments removed');
-				});
-
+				});		
 			});
+
 		} else {
 
 			db.BlogModel.findOneAndRemove({_id: comments._id}, function () {

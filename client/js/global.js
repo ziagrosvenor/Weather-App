@@ -3,9 +3,8 @@ function getMap(data) {
 	var map;
 
 	var mapOptions = {
-		zoom: 6,
-		center: new google.maps.LatLng(64.661517 , -17.907715)
-	
+		zoom: 8,
+		center: new google.maps.LatLng(51.468489 , -2.5907094)
 	};
 
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -14,7 +13,8 @@ function getMap(data) {
 
 		var lat = data[i].lat;
 		var lng = data[i].lng;
-		console.log(data[i].period[0].dayTime.weatherType);
+		var weatherType = data[i].period[0].dayTime.weatherType;
+
 		var shape = {
 			coords: [1,1,1,20,18,20,18,1],
 			type: 'poly'
@@ -24,6 +24,7 @@ function getMap(data) {
 
 		var marker = new google.maps.Marker({
 			position: position,
+			icon: '/weather-icons/w'+ weatherType +'.png',
 			map: map
 		});
 
@@ -40,5 +41,9 @@ $(document).ready(function(){
 			getMap(data);
 		}
 	});
+
+	$( "#slider" ).slider({
+		range: true,
+		values: [ 17, 67 ]
+	});
 });
-		

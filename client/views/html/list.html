@@ -3,6 +3,7 @@
   <div class="map border">
     <div id="map-canvas" class="border"></div>
   </div>
+  <div ui-slider="ui-slider" min="0" max="200" ng-model="slider"></div>
   <h2>There are {{comments.length}} comments.</h2>
   <div class="search-bar">
     <label for="search">Search:</label>
@@ -22,4 +23,8 @@
     <textarea ng-model="addContent" id="addContent" placeholder="Your comment..." class="input-flex border"></textarea>
     <input type="submit" value="Add Comment" class="btn btn-lg"/>
   </form>
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/global.js"></script>
 </section>
