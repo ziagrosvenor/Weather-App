@@ -1,7 +1,9 @@
 var app = angular.module('eventsApp', [
 	'ngResource',
 	'ngRoute',
-	'commentsController'
+	'ngSlider',
+	'commentsController',
+	'uiGmapgoogle-maps'
 ]);
 
 app.config(['$routeProvider', function ($routeProvider) {
@@ -28,6 +30,14 @@ app.factory('commentsFactory', function ($resource) {
 	return $resource('/api/comments/:commentId', 
 		{ commentId: '@_id' },
 		{ update: {method: 'PUT'}}
+	);
+
+});
+
+app.factory('weatherFactory', function ($resource) {
+	
+	return $resource('/api/weather/:period', 
+		{ period: '@period'}
 	);
 
 });

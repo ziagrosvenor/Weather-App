@@ -1,6 +1,6 @@
-var commentsController = angular.module('commentsController', ['ngAnimate']);
+var commentsController = angular.module('commentsController', ['ngAnimate', 'ngSlider', 'uiGmapgoogle-maps']);
 
-commentsController.controller('ListController', ['$scope', 'commentsFactory', function ($scope, commentsFactory) {
+commentsController.controller('ListController', ['$scope', 'commentsFactory', '$http' , function ($scope, commentsFactory, $http) {
 
 	$scope.comments = commentsFactory.query();
 
@@ -14,12 +14,71 @@ commentsController.controller('ListController', ['$scope', 'commentsFactory', fu
 			$scope.comments.push(result);
 		});
 	};
-	$scope.slider = {
-		'options': {
-			start: function (event, ui) { $log.info('Event: Slider start - set with slider options', event); },
-    		stop: function (event, ui) { $log.info('Event: Slider stop - set with slider options', event); }
+
+	$scope.map = {
+		center: {
+			latitude: 51.468489,
+			longitude: -2.5907094
+		},
+		zoom: 8
+	};
+
+	$scope.weather;
+	$scope.markers = [];
+	$scope.period;
+
+	$scope.$watch('period', function (newValue, oldValue) {
+		console.log(newValue);
+		getWeatherData();
+	});
+	
+	function getWeatherData () {
+		if(!$scope.period){
+			$scope.period = 1;
 		}
+		$http.get('/api/weather/' + $scope.period).success( function (data, status, headers, config) {
+    		setWeatherMap(data);
+  		});
 	}
+
+  	function setWeatherMap (data) {
+  		$scope.weather = data;
+  		$scope.markers = [];
+  		var markersTemp = [];
+
+  		for(var i = 0; i < $scope.weather.length; i++) {
+			lat = $scope.weather[i].lat;
+			lng = $scope.weather[i].lng;
+			icon = $scope.weather[i].icon;
+			title = 'm' + i;
+
+			var marker = {
+				latitude: lat,
+       			longitude: lng,
+       			icon: '/weather-icons/w'+ icon +'.png',
+       			title: title
+			};
+
+			marker['id'] = i;
+			markersTemp.push(marker);
+		}
+
+		$scope.markers = markersTemp;
+  	}
+
+  	getWeatherData();
+
+	$scope.value = "0";
+
+	$scope.options = {				
+		from: 1,
+		to: 5,
+		step: 1,
+		dimension: "days",
+		round: 1,
+		scale: [1, '|', 2, '|', 3, '|' , 4, '|', 5],
+	};
+
 	$scope.removeComments = function() {
 		var oldComments = $scope.comments;
 		$scope.comments = [];
@@ -49,7 +108,7 @@ commentsController.controller('EditController', ['$scope', '$routeParams', 'comm
 			var id = $scope.comments[i]._id;
 			console.log(id);
 			commentsFactory.update({commentId: id}, $scope.comments[i], function (result) {
-			console.log(result);
+				console.log(result);
 			// $scope.comments.push(result);
 			});
 		};

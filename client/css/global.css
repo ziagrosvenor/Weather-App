@@ -424,6 +424,10 @@ address {
   height: 25rem;
 }
 
+.angular-google-map-container {
+  height: 30rem !important;
+}
+
 .comment-list {
   -webkit-transition: all 0.3s ease-out;
           transition: all 0.3s ease-out;

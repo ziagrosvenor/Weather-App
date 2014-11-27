@@ -1,7 +1,7 @@
-// Require modules
+ // Require modules
 var express = require('express');
 var bodyParser = require('body-parser');
-var Database = require('./database');
+var Database = require('./server/models/database');
 var CommentsController = require('./server/controllers/comments-controller.js');
 
 // Instantiate database class
@@ -18,6 +18,7 @@ app.set('view engine', 'jade');
 
 // Routes for asset requests
 app.use('/', express.static(__dirname + '/client'));
+app.use('/bower', express.static(__dirname + '/bower_components'));
 app.use('/js', express.static(__dirname + '/client/js'));
 app.use('/css', express.static(__dirname + '/client/css'));
 
@@ -35,14 +36,27 @@ app.get('/', function(req, res){
 	});
 });
 
-// Read map data
-app.get('/api/map', function (req, res ) {
+// Read weather data
+app.get('/api/weather/:period', function (req, res ) {
+	var period = Number(req.params.period) - 1;
+
 	db.WeatherModel.find( function (err, data) {
-		res.send(data);
+		var weather = [];
+		for(var i = 0; i < 1500; i++) {
+
+			weatherPeriod = {
+				lat: data[i].lat,
+				lng: data[i].lng,
+				icon: data[i].period[period].dayTime.weatherType
+			};
+
+			weather.push(weatherPeriod);
+		}
+		res.send(weather);
 	});
 });
 
-// Return all comments request
+// Return all comments on request
 app.get('/api/comments', commentsCtrl.read);
 
 // Read comment by ID on request
