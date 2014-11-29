@@ -1,4 +1,5 @@
 module.exports = function(db) {
+	// Create comment
 	this.create = function (req, res) {
 
 		var comment = new db.BlogModel({
@@ -7,39 +8,31 @@ module.exports = function(db) {
 		});
 
 		comment.save(function (err) {
-			if (!err) {
-				return console.log("created");
-			} else {
-				return console.log(err);
-			}
+			if (err) console.error(err);
+			console.log("created");
 		});
 
 		return res.send(comment);
 	};
+
+	// Find all blog model records
 	this.read = function (req, res) {
-
 		return db.BlogModel.find(function (err, comments) {
-			if (!err) {
-				return res.send(comments);
-			} else {
-				return console.log(err);
-			}
+			if (err) console.error(err);
+			res.send(comments);
 		});
-
 	};
+
+	// Find one from blog model
 	this.readById = function (req, res) {
-
 		return db.BlogModel.findById(req.params.id, function (err, comment) {
-			if (!err) {
-				return res.send(comment);
-			} else {
-				return console.log(err);
-			}
+			if (err) console.error(err);
+			return res.send(comment);
 		});
-
 	};
-	this.update = function (req, res) {
 
+	// Update one in blog model
+	this.update = function (req, res) {
 		var putData = {
 			title: req.body.title,
 			content: req.body.content
@@ -49,14 +42,14 @@ module.exports = function(db) {
 			if (err) return console.error(err);
 			res.send(data);		
 		});
-
 	};
-	this.delete = function (req, res) {
 
+	// Delete one or many in blog model
+	this.delete = function (req, res) {
 		var comments = req.query;
 
-		if(comments._id.length > 1 && comments._id.length < 15) {
-
+		if(comments._id.length > 1 && comments._id.length < 15) 
+		{
 			db.BlogModel.find({_id: {$in: comments._id}}, function (err, comments) {
 				if(err) return console.error(err);
 				comments.forEach( function(comment) {
@@ -64,9 +57,8 @@ module.exports = function(db) {
 					console.log('comments removed');
 				});		
 			});
-
-		} else {
-
+		} 
+		else {
 			db.BlogModel.findOneAndRemove({_id: comments._id}, function () {
 				console.log('comment removed');
 			});

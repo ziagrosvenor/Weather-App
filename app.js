@@ -38,20 +38,55 @@ app.get('/', function(req, res){
 
 // Read weather data
 app.get('/api/weather/:period', function (req, res ) {
-	var period = Number(req.params.period) - 1;
+
+	var period = Number(req.params.period);
+
+	function isEven(value){
+    	if (value%2 === 0)
+    	    return true;
+    	else
+    	    return false;
+	}
+
+	if (isEven(period) === true) {
+		period = (period / 2);
+	}
+	else {
+		period = ((period - 1) / 2);
+	}
 
 	db.WeatherModel.find( function (err, data) {
+		if(err) console.error(err);
 		var weather = [];
-		for(var i = 0; i < 1500; i++) {
 
-			weatherPeriod = {
-				lat: data[i].lat,
-				lng: data[i].lng,
-				icon: data[i].period[period].dayTime.weatherType
-			};
+		for(var i = 0; i < data.length; i++) {
 
+			if(isEven(period)) 
+			{
+				console.log(period);
+				weatherPeriod = {
+					location: data[i].location,
+					lat: data[i].lat,
+					lng: data[i].lng,
+					icon: data[i].period[period].dayTime.weatherType,
+					temp: data[i].period[period].dayTime.temp,
+					date: data[i].period[period].date
+				};
+			} 
+			else {
+				weatherPeriod = {
+					location: data[i].location,
+					lat: data[i].lat,
+					lng: data[i].lng,
+					icon: data[i].period[period].nightTime.weatherType,
+					temp: data[i].period[period].nightTime.temp,
+					date: data[i].period[period].date
+				};
+			}
+			console.log(weatherPeriod);
 			weather.push(weatherPeriod);
 		}
+
 		res.send(weather);
 	});
 });

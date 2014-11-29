@@ -10,6 +10,7 @@ commentsController.controller('ListController', ['$scope', 'commentsFactory', '$
 		newComment.content = $scope.addContent;
 		$scope.addContent = "";
 		$scope.addTitle = "";
+
 		newComment.$save( function (result) {
 			$scope.comments.push(result);
 		});
@@ -24,6 +25,7 @@ commentsController.controller('ListController', ['$scope', 'commentsFactory', '$
 	};
 
 	$scope.weather;
+	$scope.infowindow = false;
 	$scope.markers = [];
 	$scope.period;
 
@@ -36,6 +38,7 @@ commentsController.controller('ListController', ['$scope', 'commentsFactory', '$
 		if(!$scope.period){
 			$scope.period = 1;
 		}
+
 		$http.get('/api/weather/' + $scope.period).success( function (data, status, headers, config) {
     		setWeatherMap(data);
   		});
@@ -46,37 +49,40 @@ commentsController.controller('ListController', ['$scope', 'commentsFactory', '$
   		$scope.markers = [];
   		var markersTemp = [];
 
+  		console.log(data);
+  		
   		for(var i = 0; i < $scope.weather.length; i++) {
-			lat = $scope.weather[i].lat;
-			lng = $scope.weather[i].lng;
 			icon = $scope.weather[i].icon;
 			title = 'm' + i;
 
 			var marker = {
-				latitude: lat,
-       			longitude: lng,
+				latitude: $scope.weather[i].lat,
+       			longitude: $scope.weather[i].lng,
        			icon: '/weather-icons/w'+ icon +'.png',
-       			title: title
+       			title: title,
+       			location: $scope.weather[i].location,
+       			temp: $scope.weather[i].temp,
+       			date: $scope.weather[i].date
 			};
 
 			marker['id'] = i;
 			markersTemp.push(marker);
+
+			$scope.markers = markersTemp;
+
 		}
 
-		$scope.markers = markersTemp;
+		
   	}
-
   	getWeatherData();
 
-	$scope.value = "0";
+	$scope.value = "1";
 
 	$scope.options = {				
-		from: 1,
-		to: 5,
+		from: 0,
+		to: 9,
 		step: 1,
-		dimension: "days",
 		round: 1,
-		scale: [1, '|', 2, '|', 3, '|' , 4, '|', 5],
 	};
 
 	$scope.removeComments = function() {
@@ -107,9 +113,9 @@ commentsController.controller('EditController', ['$scope', '$routeParams', 'comm
 		$scope.updateComment = function(i) {
 			var id = $scope.comments[i]._id;
 			console.log(id);
+			
 			commentsFactory.update({commentId: id}, $scope.comments[i], function (result) {
 				console.log(result);
-			// $scope.comments.push(result);
 			});
 		};
 	}]);

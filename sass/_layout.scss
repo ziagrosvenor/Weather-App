@@ -1,7 +1,8 @@
 .page-wrapper {
-	@extend %flex-center;
+	@extend %flex-main;
 }
 
-.comments-list {
-	width: 60%;
+.comments-list, .weather-map {
+	width: 50%;
+	padding: 3rem;
 }

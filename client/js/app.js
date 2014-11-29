@@ -8,7 +8,7 @@ var app = angular.module('eventsApp', [
 
 app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider.
-	when('/list', {
+	when('/weather', {
 		templateUrl: '/views/html/list.html',
 		controller: 'ListController'
 	}).
@@ -21,12 +21,11 @@ app.config(['$routeProvider', function ($routeProvider) {
 		controller: 'AddController'
 	}).
 	otherwise({
-		redirectTo: '/list'
+		redirectTo: '/weather'
 	});
 }]);
 
 app.factory('commentsFactory', function ($resource) {
-
 	return $resource('/api/comments/:commentId', 
 		{ commentId: '@_id' },
 		{ update: {method: 'PUT'}}
@@ -35,7 +34,6 @@ app.factory('commentsFactory', function ($resource) {
 });
 
 app.factory('weatherFactory', function ($resource) {
-	
 	return $resource('/api/weather/:period', 
 		{ period: '@period'}
 	);

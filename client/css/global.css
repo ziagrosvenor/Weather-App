@@ -3,14 +3,21 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body, html {
@@ -387,8 +394,9 @@ address {
   line-height: 1.42857;
 }
 
-.comments-list {
-  width: 60%;
+.comments-list, .weather-map {
+  width: 50%;
+  padding: 3rem;
 }
 
 .border, .module-page {
@@ -414,14 +422,44 @@ address {
   text-decoration: none;
 }
 
-.map {
-  padding: 3rem;
+.info-window {
+  width: 180px;
+  height: 120px;
+  font-size: 1rem;
+}
+
+.weather-map {
   background-color: #34495e;
 }
 
-#map-canvas {
+.map-ui {
   width: 100%;
-  height: 25rem;
+  margin: 2rem 0;
+  color: white;
+}
+
+.ui-slider {
+  margin-top: 2rem;
+}
+
+.ui-column {
+  width: 50%;
+  float: left;
+}
+
+.ui-date {
+  font-size: 1.4rem;
+  padding: 3rem 10%;
+  color: white;
+}
+
+.ui-search {
+  width: 100%;
+  height: 3rem;
+}
+.ui-search input {
+  width: 100%;
+  padding: 1rem;
 }
 
 .angular-google-map-container {
@@ -990,10 +1028,10 @@ select[multiple] {
   padding: 0.5rem;
 }
 
-.post-heading {
+.heading {
   display: inline;
-  font-weight: bold;
   padding: 0 0.5rem;
+  font-weight: bold;
   border-bottom: 2rem;
 }
 

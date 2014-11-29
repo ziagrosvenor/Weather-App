@@ -19,7 +19,7 @@ angular.module('ngSlider', ['ngSanitize'])
 				scope.mainSliderClass = 'jslider';
 
 				// TODO : skin
-				scope.mainSliderClass += ' jslider_round';					
+				scope.mainSliderClass += ' jslider';					
 
 				// model -> view
 	      ngModel.$render = function () {

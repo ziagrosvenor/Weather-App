@@ -11,6 +11,13 @@
        sans-serif;
 
 $base-color: #ecf0f1;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 body, html { 
   font-size: 100%;
   background-color: $base-color;

@@ -1,5 +1,5 @@
 module.exports = function() {
-	// Define properties to be assigned in dbConfig
+	// Define properties
 	this.BlogSchema;
 	this.BlogModel;
 	this.LocationSchema;
@@ -10,7 +10,7 @@ module.exports = function() {
 	this.configDb = function(){
 		// Require mongoose module
 		var Mongoose = require('mongoose');
-		// Select DB test
+		// Select Mongo DB 
 		var db = Mongoose.connect('mongodb://localhost/test');
 		// Connect to test
 		var con = Mongoose.connection;
@@ -18,17 +18,22 @@ module.exports = function() {
 		con.on('error', console.error.bind(console, 'connection error'));
 		// Assign Schema object to variable
 		var Schema = Mongoose.Schema;
+
 		// Instantiate Blog Schema Object
 		this.BlogSchema = new Schema({
 			title: String,
 			content: String
 		});
+
+		// Location Schema
 		this.LocationSchema = new Schema({
 			metId: Number,
 			name: String,
 			lat: Number,
 			lng: Number
 		});
+
+		// Weather Schema
 		this.WeatherSchema = new Schema({
 			location: String,
 			country: String,
@@ -52,6 +57,7 @@ module.exports = function() {
 				}
 			}]
 		});
+
 		// Creates a model named Blog with this.Schema as its schema
 		// Assign it to the BlogModel property
 		this.BlogModel = Mongoose.model('Blog', this.BlogSchema);

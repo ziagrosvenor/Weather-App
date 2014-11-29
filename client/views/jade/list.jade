@@ -1,7 +1,27 @@
-section.comments-list
+section.weather-map
 	ui-gmap-google-map(center="map.center" zoom="map.zoom")
 		ui-gmap-markers(models="markers" coords="'self'" icon="'icon'" doRebuildAll="true")
-	input(ng-model="period" ng-change="getWeatherData()" type="text" id="mySlider1" slider options="options")
+			ui-gmap-windows(show="show" doRebuildAll="true")
+				div(class="info-window" ng-non-bindable) 
+					h2 {{location}}
+					div {{temp}} degrees
+					div {{date}}
+	.ui-column
+		.map-ui
+			h3.map-heading Forecast days
+			.ui-slider
+				input(ng-model="period" ng-change="getWeatherData()" type="text" id="mySlider1" slider options="options")
+	.ui-date.ui-column 
+		p {{markers[0].date}}
+	.ui-search
+		input(type="text" ng-model="weatherQuery" class="border" name="search" placeholder="Search comments")
+		span
+			a(ng-click="removeComments()" class="btn btn-sm" ) Search locations
+		.weather-list(ng-repeat="marker in markers | filter: weatherQuery" class="module-page")
+			h2 {{marker.location}}
+			div {{marker.temp}} degrees
+			div {{marker.date}}
+section.comments-list
 	h2 There are {{comments.length}} comments.
 	.search-bar
 		label(for="search") Search:
@@ -11,7 +31,7 @@ section.comments-list
 	article.comment-list(ng-animate="'animate'" ng-repeat="comment in comments | filter: searchQuery" class="module-page")
 		label(class="list-select")
 			input(type="checkbox" ng-model="comment.selected")
-			h3.post-heading {{comment.title}}
+			h3.heading {{comment.title}}
 		p(class="comment-content") {{comment.content}}
 		a(href='#/edit/{{comments.indexOf(comment)}}' class="btn btn-sm") Edit Comment
 	//- a(href="#/add" class="btn btn-sm" ) Add a Comment

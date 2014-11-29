@@ -23,14 +23,45 @@
 	}
 }
 
-.map {
-	padding: 3rem;
+.info-window {
+	width: 180px;
+	height: 120px;
+	font-size: 1rem;
+}
+
+.weather-map {
 	background-color: $dark-blue;
 }
 
-#map-canvas {
+.map-ui {
 	width: 100%;
-	height: 25rem;
+	margin: 2rem 0;
+	color: white;
+}
+
+.ui-slider {
+	margin-top: 2rem;
+}
+
+.ui-column {
+	width: 50%;
+	float: left;
+}
+
+.ui-date {
+	font-size: 1.4rem;
+	padding: 3rem 10%;
+	color: white;
+}
+
+.ui-search {
+	width: 100%;
+	height: 3rem;
+
+	input {
+		width: 100%;
+		padding: 1rem;
+	}
 }
 
 .angular-google-map-container {
@@ -86,10 +117,10 @@
 	}
 }
 
-.post-heading {
+.heading {
 	display: inline;
-	font-weight: bold;
 	padding: 0 0.5rem;
+	font-weight: bold;
 	border-bottom: 2rem;
 }
 
