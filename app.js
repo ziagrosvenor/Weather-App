@@ -59,7 +59,7 @@ app.get('/api/weather/:period', function (req, res ) {
 		if(err) console.error(err);
 		var weather = [];
 
-		for(var i = 0; i < data.length; i++) {
+		for(var i = 0; i < 75; i++) {
 
 			if(isEven(period)) 
 			{

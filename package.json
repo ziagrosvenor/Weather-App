@@ -1,7 +1,7 @@
 {
-  "name": "User-comments-grunapp",
+  "name": "Weather Forecast App",
   "version": "1.0.0",
-  "description": "First go at node using express and mongo",
+  "description": "Five day forecast of UK weather",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

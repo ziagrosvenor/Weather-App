@@ -21,12 +21,14 @@ commentsController.controller('ListController', ['$scope', 'commentsFactory', '$
 			latitude: 51.468489,
 			longitude: -2.5907094
 		},
-		zoom: 8
+		zoom: 8,
+		options: {scrollwheel: false}
 	};
 
 	$scope.weather;
 	$scope.infowindow = false;
 	$scope.markers = [];
+	$scope.options = {scrollwheel: false};
 	$scope.period;
 
 	$scope.$watch('period', function (newValue, oldValue) {
