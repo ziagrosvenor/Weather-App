@@ -1,0 +1,23 @@
+.ui-controls
+    .ui-search( class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
+        svg(ng-click="select = !select").ui-icon
+            use(xlink:href="#search-icon")
+        input(type="text" ng-model="searchQuery" class="border" name="search" placeholder="Search comments")
+h2 There are {{weather.length}} comments.
+.ui-comments-list
+    a(ng-click="removeComments()") Remove Comments
+    a(ui-sref="weatherApp.list.locations") Locations List
+    a(ui-sref="weatherApp.list.create") Add a Comment
+article.comment-list(ng-animate="'animate'" ng-repeat="weatherLocation in weather | filter:searchQuery | limitTo:3" class="module-page")
+    label(class="list-select")
+        h3.heading {{weatherLocation.location}}
+    p(class="comment-content") {{weatherLocation.dayTime.temp}}
+    a(href='#/edit/{{comments.indexOf(comment)}}' class="btn btn-sm") Edit Comment
+//- a(href="#/add" class="btn btn-sm" ) Add a Commentf
+.footer
+    .ui-options( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
+        ul
+            li(ng-repeat="item in menuItems")
+                a(ui-sref="{{item.sref}}") {{item.title}}
+        svg(ng-click="select = !select").ui-icon
+            use(xlink:href="#menu-icon")

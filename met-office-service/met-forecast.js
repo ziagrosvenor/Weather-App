@@ -1,14 +1,19 @@
 // Require modules
 var http = require('http');
-var Database = require('./server/models/database.js');
+var Database = require('../server/models/database.js');
 
 // Instantiate + config database
 var db = new Database();
 db.configDb();
 
+db.WeatherModel.find( function(err, data) {
+	data.forEach(function(dataItem){
+		dataItem.remove();
+	})
+});
 // Find all in location model
 db.LocationModel.find( function (err, data) {
-	for(var i = 0; i < 500; i++) {
+	for(var i = 0; i < 150; i++) {
 		var metId = data[i].metId;
 
 		// Get Met of weather forecast for each of the locations
@@ -67,18 +72,18 @@ db.LocationModel.find( function (err, data) {
 			 			if (err) console.error(err);
 			 			console.log('created');
 			 		});
-			 		var upsertData = fiveDayForecast;
-
-			 		delete upsertData._id;
+			 		//var upsertData = fiveDayForecast;
+                     //
+			 		//delete upsertData._id;
 
 			 		// Run an update on the weather model in the DB
-			 		db.WeatherModel.findOneAndUpdate({location: fiveDayForecast.location}, upsertData, {upsert: false}, function (err, numCreated) {
-						if (!err) {
-							return console.log(numCreated);
-						} else {
-							return console.log(err);
-						}
-					});
+			 		//db.WeatherModel.findOneAndUpdate({location: fiveDayForecast.location}, upsertData, {upsert: false}, function (err, numCreated) {
+					//	if (!err) {
+					//		return console.log(numCreated);
+					//	} else {
+					//		return console.log(err);
+					//	}
+					//});
 			});
 			response.on('error', console.error);
 		});

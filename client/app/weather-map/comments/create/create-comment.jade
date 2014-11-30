@@ -6,7 +6,6 @@ form(ng-submit="postComment()" class="list-add-form module-page")
 	input(type="text" ng-model="addTitle" id="name" class="input-flex border")
 	label(for="commentText") Comment
 	textarea(ng-model="addContent" id="addContent" class="input-flex border" placeholder="Your comment...")
-		//- a(href="#/list")
 	input(type="submit" class="btn btn-lg" value="Add Comment")
 .footer
 	.ui-options( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")

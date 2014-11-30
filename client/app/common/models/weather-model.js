@@ -1,6 +1,8 @@
 angular.module('app.models.weather', [])
-	.factory('weatherFactory', function ($resource) {
-		return $resource('/api/weather/:period', 
-			{ period: '@period'}
-		);
+	.factory('weatherFactory', function ($http) {
+		return {
+			getWeather: function() {
+				return $http.get('/api/weather');
+			}
+		};
 	});

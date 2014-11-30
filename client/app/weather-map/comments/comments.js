@@ -1,9 +1,10 @@
 angular.module('weather.comments', [
+	'ngAnimate',
 	'app.models.comments',
 	'app.models.weather',
 	'comments.create',
 	'comments.update',
-	'ngAnimate'
+	'comments.locations'
 	])
 	.config(function ($stateProvider){
 		$stateProvider
@@ -16,6 +17,15 @@ angular.module('weather.comments', [
 					}
 				}
 			})
+			.state('weatherApp.list.locations', {
+				url: '/locations',
+				views: {
+					'comments@' : {
+						controller: 'ListLocationsCtrl',
+						templateUrl: '/app/weather-map/comments/locations/locations.html'
+					}
+				}
+			})
 		;
 	})
 	.controller('ListCommentsCtrl', ['$scope', 'commentsFactory', '$http' , function ($scope, commentsFactory, $http) {
@@ -23,7 +33,7 @@ angular.module('weather.comments', [
 
 		$scope.menuItems = [
 			{title: 'Add a Comment', sref: 'weatherApp.list.create'},
-			{title: 'Locations List', sref: 'weatherApp.list.weather'},
+			{title: 'Locations List', sref: 'weatherApp.list.locations'},
 			{title: 'Sign In', sref: 'weatherApp.signIn'}
 		];
 
@@ -47,53 +57,53 @@ angular.module('weather.comments', [
 		};
 	}])
 	.directive('menuItem', function () {
-		var controller = function ($scope) {
-			$scope.active = false;
-			$scope.select = false;
-		};
+        var controller = function ($scope) {
+            $scope.active = false;
+            $scope.select = false;
+        };
 
-		return {
-			scope: true,
-			controller: controller
-		}
-	})
-	.animation('.menu-animation', function () {
-		return {
-			beforeAddClass: function (element, className, done) {
-				if(className == 'highlight') {
-					TweenLite.to(element, 0.2, {
-						right: '-230px',
-						onComplete: done
-					});
-				}
-				if(className == 'selected') {
-					TweenLite.to(element, 0.2, {
-						right: '0',
-						onComplete: done
-					});
-				}
-				else {
-					done();
-				}
-			},
-			beforeRemoveClass: function (element, className, done) {
-				if(className == 'highlight') {
-					TweenLite.to(element, 0.4, {
-						right: '-240px',
-						onComplete: done
-					});
-				}
-				if(className == 'selected') {
-					TweenLite.to(element, 0.2, {
-						right: '-240px',
-						onComplete: done
-					});
-				}
-				else {
-					done();
-				}
-			}
-		}
-	})
+        return {
+            scope: true,
+            controller: controller
+        };
+    })
+    .animation('.menu-animation', function () {
+        return {
+            beforeAddClass: function (element, className, done) {
+                if(className == 'highlight') {
+                    TweenLite.to(element, 0.2, {
+                        right: '-230px',
+                        onComplete: done
+                    });
+                }
+                if(className == 'selected') {
+                    TweenLite.to(element, 0.2, {
+                        right: '0',
+                        onComplete: done
+                    });
+                }
+                else {
+                    done();
+                }
+            },
+            beforeRemoveClass: function (element, className, done) {
+                if(className == 'highlight') {
+                    TweenLite.to(element, 0.4, {
+                        right: '-240px',
+                        onComplete: done
+                    });
+                }
+                if(className == 'selected') {
+                    TweenLite.to(element, 0.2, {
+                        right: '-240px',
+                        onComplete: done
+                    });
+                }
+                else {
+                    done();
+                }
+            }
+        };
+    });
 
 

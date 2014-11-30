@@ -14,7 +14,6 @@ article.comment-list(ng-animate="'animate'" ng-repeat="comment in comments | fil
 		h3.heading {{comment.title}}
 	p(class="comment-content") {{comment.content}}
 	a(href='#/edit/{{comments.indexOf(comment)}}' class="btn btn-sm") Edit Comment
-//- a(href="#/add" class="btn btn-sm" ) Add a Commentf
 .footer
 	.ui-options( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
 		ul

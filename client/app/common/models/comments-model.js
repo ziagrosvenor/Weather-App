@@ -5,4 +5,3 @@ angular.module('app.models.comments', [])
 		{ update: {method: 'PUT'}}
 	);
 });
-

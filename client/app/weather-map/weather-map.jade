@@ -9,6 +9,6 @@ ui-gmap-google-map(center="map.center" draggable="true" options="map.options" zo
 		.map-ui
 			h3.map-heading Forecast days
 			.ui-slider
-				input(ng-model="period" ng-change="getWeatherData()" type="text" id="mySlider1" slider options="options")
+				input(ng-model="period" type="text" id="mySlider1" slider options="options")
 	.ui-date.ui-column
 		p {{markers[0].date}}

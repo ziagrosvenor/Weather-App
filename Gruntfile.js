@@ -25,7 +25,7 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-        target: ['./client/js/*.js', 'app.js', 'Gruntfile.js']
+        target: ['./client/app/weather-map/*.js', './client/app/weather-map/*/*.js', 'app.js', 'Gruntfile.js']
     },
 
     jade: {
@@ -40,7 +40,9 @@ module.exports = function(grunt) {
           './client/app/weather-map/comments/list.html': './client/app/weather-map/comments/list.jade',
           './client/app/weather-map/comments/create/create-comment.html': './client/app/weather-map/comments/create/create-comment.jade',
           './client/app/weather-map/comments/update/update-comment.html': './client/app/weather-map/comments/update/update.jade',
-          './client/app/weather-map/weather-map.html': './client/app/weather-map/weather-map.jade'
+          './client/app/weather-map/weather-map.html': './client/app/weather-map/weather-map.jade',
+          './client/app/weather-map/locations/locations.html': './client/app/weather-map/locations/locations.jade',
+
         }
       }
     },
@@ -51,7 +53,7 @@ module.exports = function(grunt) {
       },
 
       scripts: {
-        files: ['./client/js/*.js', 'app.js'],
+        files: ['./client/app/weather-map/*.js', './client/app/weather-map/locations/*.js','app.js'],
         tasks: ['jshint'],
         options: {
           event: ['added', 'changed'],
@@ -69,7 +71,10 @@ module.exports = function(grunt) {
       },
 
       jade: {
-        files: ['./client/app/weather-map/comments/*.jade', './client/app/weather-map/comments/*/*.jade', './client/app/weather-map/*.jade'],
+        files: ['./client/app/weather-map/comments/*.jade',
+                './client/app/weather-map/comments/*/*.jade',
+                './client/app/weather-map/*.jade',
+                './client/app/weather-map/locations/locations.jade'],
         tasks: ['jade'],
       }
     }

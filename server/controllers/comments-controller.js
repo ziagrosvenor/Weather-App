@@ -1,7 +1,6 @@
 module.exports = function(db) {
 	// Create comment
 	this.create = function (req, res) {
-
 		var comment = new db.BlogModel({
 			title: req.body.title,
 			content: req.body.content
