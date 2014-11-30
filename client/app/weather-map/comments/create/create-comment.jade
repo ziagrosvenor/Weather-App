@@ -1,0 +1,12 @@
+article.comment-list
+	label(class="list-select")
+		input(type="checkbox" ng-model="comment.selected")
+		h3.heading {{addTitle}}
+	p(class="comment-content") {{addContent}}
+form(ng-submit="postComment()" class="list-add-form module-page")
+	label(for="name") Name
+	input(type="text" ng-model="addTitle" id="name" class="input-flex border")
+	label(for="commentText") Comment
+	textarea(ng-model="addContent" id="addContent" class="input-flex border" placeholder="Your comment...")
+		//- a(href="#/list")
+	input(type="submit" class="btn btn-lg" value="Add Comment")

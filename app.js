@@ -1,4 +1,4 @@
- // Require modules
+// Require modules
 var express = require('express');
 var bodyParser = require('body-parser');
 var Database = require('./server/models/database');
@@ -19,8 +19,8 @@ app.set('view engine', 'jade');
 // Routes for asset requests
 app.use('/', express.static(__dirname + '/client'));
 app.use('/bower', express.static(__dirname + '/bower_components'));
-app.use('/js', express.static(__dirname + '/client/js'));
-app.use('/css', express.static(__dirname + '/client/css'));
+app.use('/app', express.static(__dirname + '/client/app'));
+app.use('/assets', express.static(__dirname + '/client/assets'));
 
 // Body parser for JSON
 app.use(bodyParser.json());
@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function(req, res){
-	res.render(__dirname + '/client/views/jade/index', {
+	res.render(__dirname + '/client/index', {
 
 	});
 });
