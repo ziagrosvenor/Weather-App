@@ -2,7 +2,7 @@
 <ui-gmap-google-map center="map.center" draggable="true" options="map.options" zoom="map.zoom">
   <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" doRebuildAll="true">
     <ui-gmap-windows show="show" doRebuildAll="true">
-      <div ng-non-bindable="ng-non-bindable" class="info-window"> 
+      <div ng-non-bindable="ng-non-bindable" class="info-window">
         <h2>{{location}}</h2>
         <div>{{temp}} degrees</div>
         <div>{{date}}</div>
@@ -18,14 +18,6 @@
     </div>
   </div>
 </div>
-<div class="ui-date ui-column"> 
+<div class="ui-date ui-column">
   <p>{{markers[0].date}}</p>
-</div>
-<div class="ui-search">
-  <input type="text" ng-model="weatherQuery" name="search" placeholder="Search comments" class="border"/><span><a ng-click="removeComments()" class="btn btn-sm">Search locations</a></span>
-  <div ng-repeat="marker in markers | filter: weatherQuery" class="weather-list module-page">
-    <h2>{{marker.location}}</h2>
-    <div>{{marker.temp}} degrees</div>
-    <div>{{marker.date}}</div>
-  </div>
 </div>

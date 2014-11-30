@@ -92,19 +92,18 @@ app.get('/api/weather/:period', function (req, res ) {
 });
 
 // Return all comments on request
-app.get('/api/comments', commentsCtrl.read);
+app.route('/api/comments/')
+	.get(commentsCtrl.read)
+	// Add a comment on request
+	.post(commentsCtrl.create)
+	// Delete selected comments on request
+	.delete(commentsCtrl.delete);
 
-// Read comment by ID on request
-app.get('/api/comments/:id', commentsCtrl.readById);
-
-// Add a comment on request
-app.post('/api/comments', commentsCtrl.create);
-
-// Update a comment on request
-app.put('/api/comments/:id', commentsCtrl.update);
-
-// Delete selected comments on request 
-app.delete('/api/comments/', commentsCtrl.delete);
+app.route('/api/comments/:id')
+	// Read comment by ID on request
+	.get(commentsCtrl.readById)
+	// Update a comment on request
+	.put(commentsCtrl.update);
 
 // Start server
 var server = app.listen(3000, function(){

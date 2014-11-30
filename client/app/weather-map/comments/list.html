@@ -1,14 +1,28 @@
 
-<h2>There are {{comments.length}} comments.</h2>
-<div class="search-bar">
-  <label for="search">Search:</label>
-  <input type="text" ng-model="searchQuery" name="search" placeholder="Search comments" class="border"/><span><a ng-click="removeComments()" class="btn btn-sm">Remove Comments</a></span>
+<div class="ui-controls">
+  <div ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-search menu-animation">
+    <svg ng-click="select = !select" class="ui-icon">
+      <use xlink:href="#search-icon"></use>
+    </svg>
+    <input type="text" ng-model="searchQuery" name="search" placeholder="Search comments" class="border"/>
+  </div>
 </div>
-<div class="comments-ui"><a ui-sref=".create">Add a Comment</a><a ui-sref=".search">Search Weather</a></div>
-<article ng-animate="'animate'" ng-repeat="comment in comments | filter: searchQuery" class="comment-list module-page">
+<h2>There are {{comments.length}} comments.</h2>
+<div class="ui-comments-list"><a ng-click="removeComments()">Remove Comments</a><a ui-sref="weatherApp.list.locations">Locations List</a><a ui-sref="weatherApp.list.create">Add a Comment</a></div>
+<article ng-animate="'animate'" ng-repeat="comment in comments | filter:searchQuery | limitTo:3" class="comment-list module-page">
   <label class="list-select">
     <input type="checkbox" ng-model="comment.selected"/>
     <h3 class="heading">{{comment.title}}</h3>
   </label>
   <p class="comment-content">{{comment.content}}</p><a href="#/edit/{{comments.indexOf(comment)}}" class="btn btn-sm">Edit Comment</a>
 </article>
+<div class="footer">
+  <div menu-item="menu-item" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-options menu-animation">
+    <ul>
+      <li ng-repeat="item in menuItems"><a ui-sref="{{item.sref}}">{{item.title}}</a></li>
+    </ul>
+    <svg ng-click="select = !select" class="ui-icon">
+      <use xlink:href="#menu-icon"></use>
+    </svg>
+  </div>
+</div>

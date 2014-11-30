@@ -13,4 +13,9 @@ angular.module('comments.create', [])
 				$state.go('weatherApp.list');
 			});
 		}
+		$scope.menuItems = [
+			{title: 'Comments List', sref: 'weatherApp.list'},
+			{title: 'Locations List', sref: 'weatherApp.list.weather'},
+			{title: 'Sign In', sref: 'weatherApp.signIn'}
+		];
 	}]);

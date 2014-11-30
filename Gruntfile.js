@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         browsers: ['last 10 versions']
       },
       no_dest: {
-        src: './client/css/global.css' // globbing is also possible here
+        src: './client/assets/css/global.css'
       },
     },
 
@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       dev: {
         options: {
           sassDir: './sass',
-          cssDir: './client/css',
+          cssDir: './client/assets/css',
           outputStyle: 'expanded',
           noLineComments: true
         }
