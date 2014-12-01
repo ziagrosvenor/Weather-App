@@ -30,12 +30,30 @@ angular.module('weather.comments', [
 	})
 	.controller('ListCommentsCtrl', ['$scope', 'commentsFactory', '$http' , function ($scope, commentsFactory, $http) {
 		$scope.comments = commentsFactory.query();
-
 		$scope.menuItems = [
 			{title: 'Add a Comment', sref: 'weatherApp.list.create'},
 			{title: 'Locations List', sref: 'weatherApp.list.locations'},
 			{title: 'Sign In', sref: 'weatherApp.signIn'}
 		];
+
+		$scope.listIndex = 0;
+
+		$scope.listCycle = function (isNext) {
+			var index = $scope.listIndex;
+			
+			if(isNext === true) {
+				if(index != $scope.comments.length - 1) {
+					console.log(index);
+					$scope.listIndex = $scope.listIndex + 1;
+				}
+			}
+			if(isNext === false) {
+				if(index != 0) {
+					console.log(index);
+					$scope.listIndex = $scope.listIndex - 1;
+				}
+			}
+		}
 
 		$scope.removeComments = function() {
 			var oldComments = $scope.comments;
@@ -56,6 +74,11 @@ angular.module('weather.comments', [
 			});
 		};
 	}])
+	.filter('slice', function() {
+  		return function(arr, start, end) {
+   			 return arr.slice(start, end);
+  		};
+	})
 	.directive('menuItem', function () {
         var controller = function ($scope) {
             $scope.active = false;
