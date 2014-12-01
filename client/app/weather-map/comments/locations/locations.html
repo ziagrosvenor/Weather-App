@@ -7,15 +7,43 @@
     <input type="text" ng-model="searchQuery" name="search" placeholder="Search comments" class="border"/>
   </div>
 </div>
-<h2>There are {{weather.length}} comments.</h2>
+<h2>{{weather.length}} Weather Stations</h2>
 <div class="ui-comments-list"><a ng-click="removeComments()">Remove Comments</a><a ui-sref="weatherApp.list.locations">Locations List</a><a ui-sref="weatherApp.list.create">Add a Comment</a></div>
-<article ng-animate="'animate'" ng-repeat="weatherLocation in weather | filter:searchQuery | limitTo:3" class="comment-list module-page">
+<article ng-animate="'animate'" ng-repeat="weatherLocation in weather | filter:searchQuery | slice:listIndex:listIndexMax" class="comment-list module-page">
   <label class="list-select">
-    <h3 class="heading">{{weatherLocation.location}}</h3>
+    <h3 class="heading">{{weatherLocation.location | limitTo: 14}}</h3>
   </label>
-  <p class="comment-content">{{weatherLocation.dayTime.temp}}</p><a href="#/edit/{{comments.indexOf(comment)}}" class="btn btn-sm">Edit Comment</a>
+  <table class="table">
+    <thead>
+      <th></th>
+      <th>{{ weatherLocation.period[0].date | date: 'EEE'}}</th>
+      <th>{{ weatherLocation.period[1].date | date: 'EEE'}}</th>
+      <th>{{ weatherLocation.period[2].date | date: 'EEE'}}</th>
+      <th>{{ weatherLocation.period[3].date | date: 'EEE'}}</th>
+      <th>{{ weatherLocation.period[4].date | date: 'EEE'}}</th>
+      <tr> 
+        <td>weather</td>
+        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[0].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[1].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[2].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[3].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[4].dayTime.weatherType}}.png"/></td>
+      </tr>
+      <tr> 
+        <td>temp</td>
+        <td>{{ weatherLocation.period[0].dayTime.temp}} ° c </td>
+        <td>{{ weatherLocation.period[1].dayTime.temp}} ° c </td>
+        <td>{{ weatherLocation.period[2].dayTime.temp}} ° c </td>
+        <td>{{ weatherLocation.period[3].dayTime.temp}} ° c </td>
+        <td>{{ weatherLocation.period[4].dayTime.temp}} ° c </td>
+      </tr>
+    </thead>
+  </table>
+  <p class="comment-content">{{weatherLocation.dayTime.temp}}</p>
 </article>
 <div class="footer">
+  <div ng-click="listCycle(false)" class="btn"><</div>
+  <div ng-click="listCycle(true)" class="btn">></div>
   <div menu-item="menu-item" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-options menu-animation">
     <ul>
       <li ng-repeat="item in menuItems"><a ui-sref="{{item.sref}}">{{item.title}}</a></li>

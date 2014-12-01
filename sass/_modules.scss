@@ -25,7 +25,7 @@
 	width: 50%;
 	float: left;
 }
-
+@import "modules/tables";
 // Buttons  -------------------------------------------------------------------
 //  ---------------------------------------------------------------------------
 @import "modules/buttons";
@@ -49,10 +49,14 @@
 
 .info-window {
 	width: 180px;
-	height: 120px;
+	height: 165px;
 	font-size: 1rem;
 }
-
+.weather-map-temp {
+	position: absolute;
+	left: 100px;
+	top: 115px;
+}
 .weather-map {
 	background-color: $dark-blue;
 }

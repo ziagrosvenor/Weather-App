@@ -9,7 +9,7 @@ db.configDb();
 db.WeatherModel.find( function(err, data) {
 	data.forEach(function(dataItem){
 		dataItem.remove();
-	})
+	});
 });
 // Find all in location model
 db.LocationModel.find( function (err, data) {
@@ -46,8 +46,12 @@ db.LocationModel.find( function (err, data) {
 					// Loop through the forecast periods. Result is five periods/days
 					// per location with a daytime key and a nightime key
 					for(var i = 0; i < forecastData.length; i++ ) {
+
+						var date = forecastData[i].value;
+						date = date.replace(/[a-zA-Z]+/g,'');
+
 						var oneDayForecast = { 
-							date: forecastData[i].value,
+							date: date,
 							dayTime: {
 								weatherType:forecastData[i].Rep[0].W,
 								temp: forecastData[i].Rep[0].FDm,

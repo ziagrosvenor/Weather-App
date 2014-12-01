@@ -41,7 +41,7 @@ module.exports = function(grunt) {
           './client/app/weather-map/comments/create/create-comment.html': './client/app/weather-map/comments/create/create-comment.jade',
           './client/app/weather-map/comments/update/update-comment.html': './client/app/weather-map/comments/update/update.jade',
           './client/app/weather-map/weather-map.html': './client/app/weather-map/weather-map.jade',
-          './client/app/weather-map/locations/locations.html': './client/app/weather-map/locations/locations.jade',
+          './client/app/weather-map/comments/locations/locations.html': './client/app/weather-map/comments/locations/locations.jade',
 
         }
       }

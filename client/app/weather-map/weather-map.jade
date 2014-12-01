@@ -2,9 +2,16 @@ ui-gmap-google-map(center="map.center" draggable="true" options="map.options" zo
 		ui-gmap-markers(models="markers" coords="'self'" icon="'icon'" doRebuildAll="true")
 			ui-gmap-windows(show="show" doRebuildAll="true")
 				div(class="info-window" ng-non-bindable)
-					h2 {{location}}
-					div {{temp}} degrees
-					div {{date}}
+					h3 {{location}}
+					table.table
+						thead
+							th {{ date | date: 'EEEE d'}}	
+							tr 
+								td 
+									img(src="{{icon}}")
+									.weather-map-temp {{temp}} c
+									
+								
 	.ui-column
 		.map-ui
 			h3.map-heading Forecast days
