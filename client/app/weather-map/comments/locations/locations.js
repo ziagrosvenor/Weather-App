@@ -8,6 +8,12 @@ angular.module('comments.locations', [
             console.log(data[0]);
         });
 
+        $scope.menuItems = [
+        	{title: 'Comments List', sref: 'weatherApp.list'},
+			{title: 'Add a Comment', sref: 'weatherApp.list.create'},
+			{title: 'Sign In', sref: 'weatherApp.signIn'}
+		];
+
         $scope.listIndex = 0;
         
         $scope.listCycle = function (isNext) {
@@ -25,10 +31,10 @@ angular.module('comments.locations', [
 					$scope.listIndex = $scope.listIndex - 1;
 				}
 			}
-			$scope.listIndexMax = $scope.listIndex + 3;
-			if($scope.active === true) {
+			$scope.listIndexMax = $scope.listIndex + 2;
+			if($scope.select === true) {
 				$scope.listIndex = 0;
-				$scope.listIndexMax = $scope.weather.length;
+				$scope.listIndexMax = 150;
 			}
 		}
     }])

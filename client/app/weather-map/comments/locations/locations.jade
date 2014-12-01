@@ -3,14 +3,16 @@
         svg(ng-click="select = !select").ui-icon
             use(xlink:href="#search-icon")
         input(type="text" ng-model="searchQuery" class="border" name="search" placeholder="Search comments")
-h2 {{weather.length}} Weather Stations
-.ui-comments-list
-    a(ng-click="removeComments()") Remove Comments
-    a(ui-sref="weatherApp.list.locations") Locations List
-    a(ui-sref="weatherApp.list.create") Add a Comment
+.ui-options( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
+        ul
+            li(ng-repeat="item in menuItems")
+                a(ui-sref="{{item.sref}}") {{item.title}}
+        svg(ng-click="select = !select").ui-icon
+            use(xlink:href="#menu-icon")
+h1 {{weather.length}} Weather Stations
 article.comment-list(ng-animate="'animate'" ng-repeat="weatherLocation in weather | filter:searchQuery | slice:listIndex:listIndexMax" class="module-page")
     label(class="list-select")
-        h3.heading {{weatherLocation.location | limitTo: 14}}
+        h3.heading {{weatherLocation.location}}
     table.table
         thead
             th
@@ -39,12 +41,5 @@ article.comment-list(ng-animate="'animate'" ng-repeat="weatherLocation in weathe
                 td {{ weatherLocation.period[3].dayTime.temp}} ° c 
                 td {{ weatherLocation.period[4].dayTime.temp}} ° c 
     p(class="comment-content") {{weatherLocation.dayTime.temp}}
-.footer
-    .btn(ng-click="listCycle(false)") <
-    .btn(ng-click="listCycle(true)") >
-    .ui-options( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
-        ul
-            li(ng-repeat="item in menuItems")
-                a(ui-sref="{{item.sref}}") {{item.title}}
-        svg(ng-click="select = !select").ui-icon
-            use(xlink:href="#menu-icon")
+.btn(ng-click="listCycle(false)") <
+.btn(ng-click="listCycle(true)") >

@@ -14,8 +14,8 @@ angular.module('comments.create', [])
 			});
 		}
 		$scope.menuItems = [
+			{title: 'Locations List', sref: 'weatherApp.list.locations'},
 			{title: 'Comments List', sref: 'weatherApp.list'},
-			{title: 'Locations List', sref: 'weatherApp.list.weather'},
 			{title: 'Sign In', sref: 'weatherApp.signIn'}
 		];
 	}]);

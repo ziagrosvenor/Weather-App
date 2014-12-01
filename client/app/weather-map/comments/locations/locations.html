@@ -7,11 +7,18 @@
     <input type="text" ng-model="searchQuery" name="search" placeholder="Search comments" class="border"/>
   </div>
 </div>
-<h2>{{weather.length}} Weather Stations</h2>
-<div class="ui-comments-list"><a ng-click="removeComments()">Remove Comments</a><a ui-sref="weatherApp.list.locations">Locations List</a><a ui-sref="weatherApp.list.create">Add a Comment</a></div>
+<div menu-item="menu-item" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-options menu-animation">
+  <ul>
+    <li ng-repeat="item in menuItems"><a ui-sref="{{item.sref}}">{{item.title}}</a></li>
+  </ul>
+  <svg ng-click="select = !select" class="ui-icon">
+    <use xlink:href="#menu-icon"></use>
+  </svg>
+</div>
+<h1>{{weather.length}} Weather Stations</h1>
 <article ng-animate="'animate'" ng-repeat="weatherLocation in weather | filter:searchQuery | slice:listIndex:listIndexMax" class="comment-list module-page">
   <label class="list-select">
-    <h3 class="heading">{{weatherLocation.location | limitTo: 14}}</h3>
+    <h3 class="heading">{{weatherLocation.location}}</h3>
   </label>
   <table class="table">
     <thead>
@@ -41,15 +48,5 @@
   </table>
   <p class="comment-content">{{weatherLocation.dayTime.temp}}</p>
 </article>
-<div class="footer">
-  <div ng-click="listCycle(false)" class="btn"><</div>
-  <div ng-click="listCycle(true)" class="btn">></div>
-  <div menu-item="menu-item" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-options menu-animation">
-    <ul>
-      <li ng-repeat="item in menuItems"><a ui-sref="{{item.sref}}">{{item.title}}</a></li>
-    </ul>
-    <svg ng-click="select = !select" class="ui-icon">
-      <use xlink:href="#menu-icon"></use>
-    </svg>
-  </div>
-</div>
+<div ng-click="listCycle(false)" class="btn"><</div>
+<div ng-click="listCycle(true)" class="btn">></div>

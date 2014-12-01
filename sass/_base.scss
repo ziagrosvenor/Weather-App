@@ -38,6 +38,10 @@ body, html {
   font-family: $font-stack;
   height: 100%;
   box-sizing: border-box;
+  @include at-breakpoint($bp-1) {
+    position: relative;
+    overflow-y: scroll;
+  }
 }
 
   // Headings

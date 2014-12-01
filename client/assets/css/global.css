@@ -47,6 +47,12 @@ body, html {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
+@media (max-width: 1200px) {
+  body, html {
+    position: relative;
+    overflow-y: scroll;
+  }
+}
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -424,6 +430,12 @@ address {
   width: 50%;
   padding: 3rem;
 }
+@media (max-width: 1200px) {
+  .comments-list, .weather-map {
+    width: 100%;
+    padding: 1rem;
+  }
+}
 
 .list-container {
   overflow: hidden;
@@ -436,7 +448,7 @@ address {
   bottom: 0;
   right: 0;
   width: 50%;
-  height: 160px;
+  height: 90px;
   padding-left: 3rem;
 }
 
@@ -973,7 +985,7 @@ input[type="button"].btn-block {
 }
 
 .weather-map {
-  background-color: #34495e;
+  background-color: #2c3e50;
 }
 
 .map-ui {
@@ -1030,10 +1042,10 @@ input[type="button"].btn-block {
 .ui-search, .ui-options {
   width: 320px;
   height: 80px;
-  position: absolute;
+  position: fixed;
   right: -240px;
   top: 0;
-  background-color: #34495e;
+  background-color: #2c3e50;
 }
 .ui-search input, .ui-search ul, .ui-options input, .ui-options ul {
   float: right;
@@ -1042,6 +1054,10 @@ input[type="button"].btn-block {
 .ui-search input, .ui-options input {
   width: 220px;
   margin: 15px 10px;
+}
+
+.ui-search {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .ui-options {

@@ -31,8 +31,8 @@ angular.module('weather.comments', [
 	.controller('ListCommentsCtrl', ['$scope', 'commentsFactory', '$http' , function ($scope, commentsFactory, $http) {
 		$scope.comments = commentsFactory.query();
 		$scope.menuItems = [
-			{title: 'Add a Comment', sref: 'weatherApp.list.create'},
 			{title: 'Locations List', sref: 'weatherApp.list.locations'},
+			{title: 'Add a Comment', sref: 'weatherApp.list.create'},
 			{title: 'Sign In', sref: 'weatherApp.signIn'}
 		];
 
@@ -128,5 +128,3 @@ angular.module('weather.comments', [
             }
         };
     });
-
-

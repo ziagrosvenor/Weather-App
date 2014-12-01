@@ -7,6 +7,11 @@
 .comments-list, .weather-map {
 	width: 50%;
 	padding: 3rem;
+
+  @include at-breakpoint($bp-1) {
+    width: 100%;
+    padding: 1rem;
+  }
 }
 
 .list-container {
@@ -20,6 +25,6 @@
   bottom: 0;
   right: 0;
   width: 50%;
-  height: 160px;
+  height: 90px;
   padding-left: 3rem;
 }

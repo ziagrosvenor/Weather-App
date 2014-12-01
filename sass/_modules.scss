@@ -31,7 +31,7 @@
 @import "modules/buttons";
 
 .btn {
-	background-color: $dark-blue;
+	background-color: $light-blue;
 	color: white;
 	transition: all 0.15s ease-out;
 	text-decoration: none;
@@ -120,7 +120,7 @@
 .ui-search, .ui-options {
 	width: 320px;
 	height: 80px;
-	position: absolute;
+	position: fixed;
 	right: -240px;
 	top: 0;
 	background-color: $dark-blue;
@@ -133,7 +133,9 @@
 		margin: 15px 10px;
 	}
 }
-
+.ui-search {
+	border-bottom: 2px solid rgba(white, 0.5);
+}
 .ui-options {
 	top: 80px;
 	ul {
