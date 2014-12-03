@@ -41,5 +41,6 @@ article.comment-list(ng-animate="'animate'" ng-repeat="weatherLocation in weathe
                 td {{ weatherLocation.period[3].dayTime.temp}} ° c 
                 td {{ weatherLocation.period[4].dayTime.temp}} ° c 
     p(class="comment-content") {{weatherLocation.dayTime.temp}}
-.btn(ng-click="listCycle(false)") <
-.btn(ng-click="listCycle(true)") >
+.ui-footer
+    .btn(ng-click="listCycle(false)") <
+    .btn(ng-click="listCycle(true)") >

@@ -1,7 +1,7 @@
-module.exports = function(db) {
+module.exports = function(model) {
 	// Create comment
 	this.create = function (req, res) {
-		var comment = new db.BlogModel({
+		var comment = new model({
 			title: req.body.title,
 			content: req.body.content
 		});
@@ -16,7 +16,7 @@ module.exports = function(db) {
 
 	// Find all blog model records
 	this.read = function (req, res) {
-		return db.BlogModel.find(function (err, comments) {
+		return model.find(function (err, comments) {
 			if (err) console.error(err);
 			res.send(comments);
 		});
@@ -24,7 +24,7 @@ module.exports = function(db) {
 
 	// Find one from blog model
 	this.readById = function (req, res) {
-		return db.BlogModel.findById(req.params.id, function (err, comment) {
+		return model.findById(req.params.id, function (err, comment) {
 			if (err) console.error(err);
 			return res.send(comment);
 		});
@@ -37,7 +37,7 @@ module.exports = function(db) {
 			content: req.body.content
 		};
 
-		return db.BlogModel.findOneAndUpdate({_id: req.params.id}, putData , {upsert: true}, function (err, data) {
+		return model.findOneAndUpdate({_id: req.params.id}, putData , {upsert: true}, function (err, data) {
 			if (err) return console.error(err);
 			res.send(data);		
 		});
@@ -49,7 +49,7 @@ module.exports = function(db) {
 
 		if(comments._id.length > 1 && comments._id.length < 15) 
 		{
-			db.BlogModel.find({_id: {$in: comments._id}}, function (err, comments) {
+			model.find({_id: {$in: comments._id}}, function (err, comments) {
 				if(err) return console.error(err);
 				comments.forEach( function(comment) {
 					comment.remove();
@@ -58,7 +58,7 @@ module.exports = function(db) {
 			});
 		} 
 		else {
-			db.BlogModel.findOneAndRemove({_id: comments._id}, function () {
+			model.findOneAndRemove({_id: comments._id}, function () {
 				console.log('comment removed');
 			});
 		}

@@ -9,13 +9,11 @@ ui-gmap-google-map(center="map.center" draggable="true" options="map.options" zo
 							tr 
 								td 
 									img(src="{{icon}}")
-									.weather-map-temp {{temp}} c
-									
-								
+									.weather-map-temp {{temp}} c					
 	.ui-column
 		.map-ui
 			h3 {{markers[0].date | date: "fullDate"}}
 			.ui-slider
 				input(ng-model="period" type="text" id="mySlider1" slider options="options")
 	.ui-date.ui-column
-		
+		h3 {{currentLocation}}

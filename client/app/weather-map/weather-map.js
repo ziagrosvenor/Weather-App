@@ -26,13 +26,12 @@ angular.module('weather', [
 				latitude: 51.468489,
 				longitude: -2.5907094
 			},
-			zoom: 8,
-			options: {scrollwheel: false}
+			zoom: 7,
+			options: {scrollwheel: false, optimized: true}
 		};
 
 		$scope.infowindow = false;
 		$scope.markers = [];
-		$scope.options = {scrollwheel: false};
 		$scope.value = "1";
 		$scope.options = {
 			from: 0,
@@ -40,6 +39,42 @@ angular.module('weather', [
 			step: 1,
 			round: 1,
 		};
+
+		function getGeoLocation() {
+			if (navigator.geolocation) {
+				$scope.currentLocation = navigator.geolocation.getCurrentPosition(findNearest);
+			}
+		}
+
+		function findNearest(position) {
+			userLocation = {
+				latitude: position.coords.latitude,
+				longitude: position.coords.longditude
+			};
+
+			var locationsToSearch = {};
+			var allLocations = $scope.weather;
+
+			for(var i = 0; i < allLocations.length; i++) {
+				weatherLocation = {
+					latitude: allLocations[i].lat,
+					longitude: allLocations[i].lng
+				};
+
+				locationsToSearch[allLocations.location] = weatherLocation;
+			}
+
+			console.log(geolib.findNearest(userLocation, locationsToSearch, 1));
+		}
+
+		getGeoLocation();
+
+		function tempChart() {
+			var data = [];
+			for(var i = 0; i < $scope.markers.length; i++) {
+				data.push($scope.markers[i].temp);
+			}
+		}
 	
 		function getWeatherData () {
 			if(!$scope.period){
@@ -118,7 +153,7 @@ angular.module('weather', [
 
 				markersTemp.push(marker);
 				$scope.markers = markersTemp;
-				console.log($scope.markers[i].location);
+				tempChart();
 			}
   		}
 

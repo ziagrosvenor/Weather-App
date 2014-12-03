@@ -48,12 +48,12 @@ angular.module('weather.comments', [
 				}
 			}
 			if(isNext === false) {
-				if(index != 0) {
+				if(index !== 0) {
 					console.log(index);
 					$scope.listIndex = $scope.listIndex - 1;
 				}
 			}
-		}
+		};
 
 		$scope.removeComments = function() {
 			var oldComments = $scope.comments;

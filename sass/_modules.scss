@@ -21,11 +21,23 @@
 	background-color: white;
 }
 
+.bar {
+	display: inline-block;
+	width: 20px;
+	height: 75px; /* Gets overriden by D3-assigned height below */
+	margin-right: 2px;
+	fill: teal;
+}
+
 .ui-column {
 	width: 50%;
 	float: left;
 }
+
+// Bootstrap tables ------------------------------------------------------------
+// ----------------------------------------------------------------------------
 @import "modules/tables";
+
 // Buttons  -------------------------------------------------------------------
 //  ---------------------------------------------------------------------------
 @import "modules/buttons";
@@ -133,9 +145,11 @@
 		margin: 15px 10px;
 	}
 }
+
 .ui-search {
 	border-bottom: 2px solid rgba(white, 0.5);
 }
+
 .ui-options {
 	top: 80px;
 	ul {
@@ -152,6 +166,24 @@
 		  text-decoration: none;
 		  color: white;
 		}
+	}
+}
+
+.ui-footer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 50%;
+	height: 130px;
+	background-color: $base-color;
+
+	.btn:first-child  {
+		margin-left: 3rem;
+	}
+
+	@include at-breakpoint($bp-1) {
+		height: 40px;
+		width: 100%;
 	}
 }
 

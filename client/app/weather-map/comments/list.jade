@@ -21,5 +21,6 @@ h2 There are {{comments.length}} comments.
 			h3.heading {{comment.title}}
 		p(class="comment-content") {{comment.content}}
 		a(href='#/edit/{{comments.indexOf(comment)}}' class="btn btn-sm") Edit Comment
+.ui-footer
 	.btn(ng-click="listCycle(false)") <
 	.btn(ng-click="listCycle(true)") >

@@ -18,6 +18,7 @@ html(ng-app="weatherApp")
 		script(src="/bower/angular-ui-router/release/angular-ui-router.js")
 		script(src="/assets/libs/ng-slider.js")
 		script(src="/assets/libs/ng-slider.tmpl.min.js")
+		script(src="/assets/libs/geolib.js")
 		script(src="/app/app.js")
 		script(src="/app/common/models/comments-model.js")
 		script(src="/app/common/models/weather-model.js")
@@ -29,5 +30,6 @@ html(ng-app="weatherApp")
 		include ./assets/svg/search-icon.svg
 		.page-wrapper
 			section.weather-map(ui-view="weather-map")
+				h2 Turn on javascript to view
 			section.comments-list(ui-view="comments")
 		script(src="//localhost:35729/livereload.js")

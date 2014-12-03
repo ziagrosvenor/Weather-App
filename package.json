@@ -1,5 +1,5 @@
 {
-  "name": "Weather Forecast App",
+  "name": "weatherforecastapp",
   "version": "1.0.0",
   "description": "Five day forecast of UK weather",
   "main": "app.js",

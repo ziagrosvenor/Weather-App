@@ -25,13 +25,16 @@ angular.module('comments.locations', [
 					$scope.listIndex = $scope.listIndex + 1;
 				}
 			}
-			if(isNext === false) {
+
+			else if (isNext === false) {
 				if(index != 0) {
 					console.log(index);
 					$scope.listIndex = $scope.listIndex - 1;
 				}
 			}
+
 			$scope.listIndexMax = $scope.listIndex + 2;
+
 			if($scope.select === true) {
 				$scope.listIndex = 0;
 				$scope.listIndexMax = 150;

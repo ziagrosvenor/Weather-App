@@ -9,7 +9,7 @@
             <th>{{ date | date: 'EEEE d'}}	</th>
             <tr> 
               <td> <img src="{{icon}}"/>
-                <div class="weather-map-temp">{{temp}} c</div>
+                <div class="weather-map-temp">{{temp}} c					</div>
               </td>
             </tr>
           </thead>
@@ -26,4 +26,6 @@
     </div>
   </div>
 </div>
-<div class="ui-date ui-column"></div>
+<div class="ui-date ui-column">
+  <h3>{{currentLocation}}</h3>
+</div>

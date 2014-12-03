@@ -2,14 +2,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var Database = require('./server/models/database');
+var bindModels = require('./server/models/bind-models.js');
 var CommentsController = require('./server/controllers/comments-controller.js');
 
-// Instantiate database class
-var db = new Database();
-db.configDb();
+var db = Database();
+
+var models = bindModels(db);
 
 // Instantiate comments controller class
-var commentsCtrl = new CommentsController(db);
+var commentsCtrl = new CommentsController(models.BlogModel);
 
 // Create instance of express() as app
 var app = express();
@@ -36,7 +37,7 @@ app.get('/', function(req, res){
 
 // Read weather data
 app.get('/api/weather/', function (req, res ) {
-	db.WeatherModel.find( function (err, data) {
+	models.WeatherModel.find( function (err, data) {
 		if(err) console.error(err);
 		res.send(data);
 	});
