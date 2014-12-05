@@ -49,7 +49,7 @@ angular.module('weather', [
 		function findNearest(position) {
 			userLocation = {
 				latitude: position.coords.latitude,
-				longitude: position.coords.longditude
+				longitude: position.coords.longitude
 			};
 
 			var locationsToSearch = {};
@@ -61,10 +61,11 @@ angular.module('weather', [
 					longitude: allLocations[i].lng
 				};
 
-				locationsToSearch[allLocations.location] = weatherLocation;
+				locationsToSearch[allLocations[i].location] = weatherLocation;
 			}
 
-			console.log(geolib.findNearest(userLocation, locationsToSearch, 1));
+			var nearestWeatherStation = geolib.findNearest(userLocation, locationsToSearch, 1);
+			console.log(nearestWeatherStation);
 		}
 
 		getGeoLocation();
@@ -77,7 +78,7 @@ angular.module('weather', [
 		}
 	
 		function getWeatherData () {
-			if(!$scope.period){
+			if(!$scope.period) {
 				$scope.period = 1;
 			}
 
@@ -113,9 +114,8 @@ angular.module('weather', [
 
 				if(isEven(sliderValue))
 				{
-					var location = $scope.weather[i].location;
 					weatherPeriod = {
-						location: location ,
+						location: $scope.weather[i].location,
 						lat: $scope.weather[i].lat,
 						lng: $scope.weather[i].lng,
 						icon: $scope.weather[i].period[sliderValue].dayTime.weatherType,

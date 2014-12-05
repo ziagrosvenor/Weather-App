@@ -5,10 +5,10 @@ var bindModels = require('../server/models/bind-models.js');
 
 // Instantiate + config database
 var db = Database();
-var models = bindModels();
+var models = bindModels(db);
 
 models.WeatherModel.find( function (err, data) {
-	data.forEach(function(dataItem){
+	data.forEach(function (dataItem) {
 		dataItem.remove();
 	});
 });
