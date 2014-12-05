@@ -37,12 +37,9 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          './client/app/weather-map/comments/list.html': './client/app/weather-map/comments/list.jade',
-          './client/app/weather-map/comments/create/create-comment.html': './client/app/weather-map/comments/create/create-comment.jade',
-          './client/app/weather-map/comments/update/update-comment.html': './client/app/weather-map/comments/update/update.jade',
-          './client/app/weather-map/weather-map.html': './client/app/weather-map/weather-map.jade',
-          './client/app/weather-map/comments/locations/locations.html': './client/app/weather-map/comments/locations/locations.jade',
-
+          './client/app/weather-map/locations/nearest-location.html': './client/app/weather-map/locations/nearest-location.jade',
+          './client/app/weather-map/locations/list-locations/list-locations.html': './client/app/weather-map/locations/list-locations/list-locations.jade',
+          './client/app/weather-map/weather-map.html': './client/app/weather-map/weather-map.jade'
         }
       }
     },
@@ -71,10 +68,9 @@ module.exports = function(grunt) {
       },
 
       jade: {
-        files: ['./client/app/weather-map/comments/*.jade',
-                './client/app/weather-map/comments/*/*.jade',
-                './client/app/weather-map/*.jade',
-                './client/app/weather-map/locations/locations.jade'],
+        files: ['./client/app/weather-map/locations/*.jade',
+                './client/app/weather-map/locations/*/*.jade',
+                './client/app/weather-map/*.jade'],
         tasks: ['jade'],
       }
     }

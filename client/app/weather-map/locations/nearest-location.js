@@ -1,78 +1,71 @@
-angular.module('weather.comments', [
+angular.module('weather.locations', [
 	'ngAnimate',
-	'app.models.comments',
 	'app.models.weather',
-	'comments.create',
-	'comments.update',
-	'comments.locations'
+	'locations.list'
 	])
 	.config(function ($stateProvider){
 		$stateProvider
-			.state('weatherApp.list.create', {
-				url: '/new-comment',
-				views: {
-					'comments@' : {
-						controller: 'CreateCommentCtrl',
-						templateUrl: '/app/weather-map/comments/create/create-comment.html'
-					}
-				}
-			})
-			.state('weatherApp.list.locations', {
+			.state('weatherApp.weather.list', {
 				url: '/locations',
 				views: {
-					'comments@' : {
+					'locations@' : {
 						controller: 'ListLocationsCtrl',
-						templateUrl: '/app/weather-map/comments/locations/locations.html'
+						templateUrl: '/app/weather-map/locations/list-locations/list-locations.html'
 					}
 				}
 			})
 		;
 	})
-	.controller('ListCommentsCtrl', ['$scope', 'commentsFactory', '$http' , function ($scope, commentsFactory, $http) {
-		$scope.comments = commentsFactory.query();
+	.controller('nearestLocationCtrl', ['$scope', 'weatherFactory', '$http' , function ($scope, weatherFactory, $http) {
+		weatherFactory.getWeather().success( function (data, status, headers, config) {
+    		$scope.weather = data;
+  		});
+
 		$scope.menuItems = [
-			{title: 'Locations List', sref: 'weatherApp.list.locations'},
-			{title: 'Add a Comment', sref: 'weatherApp.list.create'},
-			{title: 'Sign In', sref: 'weatherApp.signIn'}
+			{title: 'Locations List', sref: 'weatherApp.weather.list'},
+			{title: 'More Info', sref: 'weatherApp.weather.info'},
+			{title: 'Contact', sref: 'weatherApp.weather.contact'}
 		];
 
-		$scope.listIndex = 0;
-
-		$scope.listCycle = function (isNext) {
-			var index = $scope.listIndex;
-			
-			if(isNext === true) {
-				if(index != $scope.comments.length - 1) {
-					console.log(index);
-					$scope.listIndex = $scope.listIndex + 1;
-				}
+		function getGeoLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(findNearest);
 			}
-			if(isNext === false) {
-				if(index !== 0) {
-					console.log(index);
-					$scope.listIndex = $scope.listIndex - 1;
-				}
-			}
-		};
+		}
 
-		$scope.removeComments = function() {
-			var oldComments = $scope.comments;
-			$scope.comments = [];
-			commentsSelected = {
-				_id: [
-	
-				]
+		function findNearest(position) {
+			userLocation = {
+				latitude: position.coords.latitude,
+				longitude: position.coords.longitude
 			};
 
-			angular.forEach(oldComments, function (comment) {
-				if(comment.selected) commentsSelected._id.push(comment._id);
-				if(!comment.selected) $scope.comments.push(comment);
+			var locationsToSearch = {};
+			var allLocations = $scope.weather;
+			var outputLocation;
+
+			for(var i = 0; i < allLocations.length; i++) {
+				weatherLocation = {
+					latitude: allLocations[i].lat,
+					longitude: allLocations[i].lng
+				};
+
+				locationsToSearch[allLocations[i].location] = weatherLocation;
+			}
+
+			var nearestWeatherLocation = geolib.findNearest(userLocation, locationsToSearch, 1);
+			
+			angular.forEach($scope.weather, function(location) {
+				if(location.location === nearestWeatherLocation.key) {
+					outputLocation = location;
+				}
 			});
-		
-			commentsFactory.delete(commentsSelected, function (result) {
-				console.log(result);
-			});
-		};
+
+			$scope.localWeather = outputLocation;
+
+			console.log($scope.localWeather);
+		}
+
+		getGeoLocation();
 	}])
 	.filter('slice', function() {
   		return function(arr, start, end) {

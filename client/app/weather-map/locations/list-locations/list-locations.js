@@ -1,11 +1,9 @@
-angular.module('comments.locations', [
-    'weather.comments',
+angular.module('locations.list', [
     'app.models.weather'
     ])
     .controller('ListLocationsCtrl', ['$scope', 'weatherFactory', function ($scope, weatherFactory) {
         weatherFactory.getWeather().success( function (data, err) {
             $scope.weather = data;
-            console.log(data[0]);
         });
 
         $scope.menuItems = [

@@ -4,7 +4,7 @@ var app = angular.module('weatherApp', [
 	'ui.router',
 	'ngSlider',
 	'weather',
-	'weather.comments',
+	'weather.locations',
 	'uiGmapgoogle-maps'
 ]);
 

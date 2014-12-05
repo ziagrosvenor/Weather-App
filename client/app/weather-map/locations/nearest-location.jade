@@ -1,0 +1,42 @@
+.ui-controls
+    .ui-search( class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
+        svg(ng-click="select = !select").ui-icon
+            use(xlink:href="#search-icon")
+        input(type="text" ng-model="searchQuery" class="border" name="search" placeholder="Search comments")
+.ui-options( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
+        ul
+            li(ng-repeat="item in menuItems")
+                a(ui-sref="{{item.sref}}") {{item.title}}
+        svg(ng-click="select = !select").ui-icon
+            use(xlink:href="#menu-icon")
+h1 Weather near you
+article.comment-list(ng-model="localWeather" class="module-page")
+    h3.heading {{localWeather.location}}
+    table.table
+        thead
+            th
+            th {{ localWeather.period[0].date | date: 'EEE'}}
+            th {{ localWeather.period[1].date | date: 'EEE'}}
+            th {{ localWeather.period[2].date | date: 'EEE'}}
+            th {{ localWeather.period[3].date | date: 'EEE'}}
+            th {{ localWeather.period[4].date | date: 'EEE'}}
+            tr 
+                td weather
+                td
+                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[0].dayTime.weatherType}}.png") 
+                td
+                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[1].dayTime.weatherType}}.png")
+                td
+                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[2].dayTime.weatherType}}.png")
+                td
+                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[3].dayTime.weatherType}}.png")
+                td
+                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[4].dayTime.weatherType}}.png")
+            tr 
+                td temp
+                td {{ localWeather.period[0].dayTime.temp}} ° c 
+                td {{ localWeather.period[1].dayTime.temp}} ° c 
+                td {{ localWeather.period[2].dayTime.temp}} ° c 
+                td {{ localWeather.period[3].dayTime.temp}} ° c 
+                td {{ localWeather.period[4].dayTime.temp}} ° c 
+    p(class="comment-content") {{localWeather.dayTime.temp}}

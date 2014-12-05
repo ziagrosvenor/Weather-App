@@ -5,16 +5,16 @@ angular.module('weather', [
 	])
 	.config(function ($stateProvider){
 		$stateProvider
-			.state('weatherApp.list', {
+			.state('weatherApp.weather', {
 				url: '/',
 				views: {
 					'weather-map@': {
 						controller: 'WeatherMapCtrl',
 						templateUrl: '/app/weather-map/weather-map.html'
 					},
-					'comments@': {
-						controller: 'ListCommentsCtrl',
-						templateUrl: '/app/weather-map/comments/list.html'
+					'locations@': {
+						controller: 'nearestLocationCtrl',
+						templateUrl: '/app/weather-map/locations/nearest-location.html'
 					}
 				}
 			})
@@ -39,36 +39,6 @@ angular.module('weather', [
 			step: 1,
 			round: 1,
 		};
-
-		function getGeoLocation() {
-			if (navigator.geolocation) {
-				$scope.currentLocation = navigator.geolocation.getCurrentPosition(findNearest);
-			}
-		}
-
-		function findNearest(position) {
-			userLocation = {
-				latitude: position.coords.latitude,
-				longitude: position.coords.longitude
-			};
-
-			var locationsToSearch = {};
-			var allLocations = $scope.weather;
-
-			for(var i = 0; i < allLocations.length; i++) {
-				weatherLocation = {
-					latitude: allLocations[i].lat,
-					longitude: allLocations[i].lng
-				};
-
-				locationsToSearch[allLocations[i].location] = weatherLocation;
-			}
-
-			var nearestWeatherStation = geolib.findNearest(userLocation, locationsToSearch, 1);
-			console.log(nearestWeatherStation);
-		}
-
-		getGeoLocation();
 
 		function tempChart() {
 			var data = [];
