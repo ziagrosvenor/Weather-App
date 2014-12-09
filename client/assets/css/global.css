@@ -442,16 +442,6 @@ address {
   height: 80%;
 }
 
-.footer {
-  position: fixed;
-  background-color: #ecf0f1;
-  bottom: 0;
-  right: 0;
-  width: 50%;
-  height: 90px;
-  padding-left: 3rem;
-}
-
 .ui-icon {
   display: inline;
   width: 50px;
@@ -471,15 +461,6 @@ address {
   padding: 1.5rem;
   margin: 1rem 0;
   background-color: white;
-}
-
-.bar {
-  display: inline-block;
-  width: 20px;
-  height: 75px;
-  /* Gets overriden by D3-assigned height below */
-  margin-right: 2px;
-  fill: teal;
 }
 
 .ui-column {
@@ -1046,6 +1027,26 @@ input[type="button"].btn-block {
   text-decoration: none;
   border-right: 2px solid black;
   padding: 0 0.5rem;
+}
+
+#barchart {
+  width: 400px;
+  height: 300px;
+  margin: 50px auto;
+  background-color: #ddd;
+}
+
+.bar {
+  width: 20px;
+  margin: 1px;
+  display: inline-block;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
 }
 
 .ui-search, .ui-options {

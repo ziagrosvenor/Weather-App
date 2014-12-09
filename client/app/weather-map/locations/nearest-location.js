@@ -16,7 +16,7 @@ angular.module('weather.locations', [
 			})
 		;
 	})
-	.controller('nearestLocationCtrl', ['$scope', 'weatherFactory', '$http' , function ($scope, weatherFactory, $http) {
+	.controller('nearestLocationCtrl', ['$scope', 'weatherFactory', '$http', '$filter' , function ($scope, weatherFactory, $http, $filter) {
 		weatherFactory.getWeather().success( function (data, status, headers, config) {
     		$scope.weather = data;
   		});
@@ -61,11 +61,84 @@ angular.module('weather.locations', [
 			});
 
 			$scope.localWeather = outputLocation;
-
-			console.log($scope.localWeather);
+			makeChart($scope.localWeather);
+			return $scope.localWeather;
 		}
 
+		function makeChart (dataset) {
+			var days = [];
+			var rainChance = [];
+			var periods = {};
+
+			angular.forEach(dataset.period, function (period, i) {
+				days.push(dataset.period[i].date);
+				rainChance.push(dataset.period[i].dayTime.rainChance);
+			});
+
+			periods.days = days;
+			periods.rainChance = rainChance;
+
+			var margin = {top: 20, right: 20, bottom: 50, left: 50};
+			var w = 400 - margin.left - margin.right, 
+				h = 300 - margin.top - margin.bottom;
+
+			var svg = d3.select('#barchart').append('svg')
+				.attr('width', w + margin.left + margin.right)
+				.attr('height', h + margin.top + margin.bottom)
+				.append('g')
+				.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+
+			var xScale = d3.scale.ordinal()
+				.domain(periods.rainChance)
+				.rangeBands([0, w], 0.1, 0.1);
+
+			var xAxis = d3.svg.axis()
+				.scale(xScale)
+				.orient('bottom')
+				.ticks(5)
+				.innerTickSize(6)
+				.outerTickSize(8)
+				.tickPadding(12)
+				.tickFormat(function (d, i) {
+					return $filter('date')(periods.days[i], 'EEE');
+				});
+
+			svg.append('g')
+				.attr('class', 'x axis')
+				.attr('transform', 'translate(0 ' + (h) + ')')
+				.call(xAxis);
+
+			var yScale = d3.scale.linear()
+				.domain([0, d3.max(periods.rainChance) * 1.1])
+				.range([0, h]);
+
+			var colorScale = d3.scale.linear()
+				.domain([0, d3.max(periods.rainChance)])
+				.range(['yellow', 'tomato']);
+
+			svg.selectAll('rect')
+				.data(periods.rainChance)
+				.enter()
+				.append('rect')
+				.attr('class', 'bar')
+				.attr('fill', colorScale)
+				.attr('x', function (d, i) {
+					return xScale(d);
+				})
+				.attr('y', h)
+				.attr('width', xScale.rangeBand())
+				.attr('height', 0)
+				.transition()
+				.duration(500)
+				.attr('y', function (d) {
+					return h - yScale(d);
+				})
+				.attr('height', function (d) {
+					return yScale(d);
+				});
+		}
 		getGeoLocation();
+
 	}])
 	.filter('slice', function() {
   		return function(arr, start, end) {

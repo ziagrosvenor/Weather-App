@@ -39,13 +39,6 @@ angular.module('weather', [
 			step: 1,
 			round: 1,
 		};
-
-		function tempChart() {
-			var data = [];
-			for(var i = 0; i < $scope.markers.length; i++) {
-				data.push($scope.markers[i].temp);
-			}
-		}
 	
 		function getWeatherData () {
 			if(!$scope.period) {
@@ -123,7 +116,6 @@ angular.module('weather', [
 
 				markersTemp.push(marker);
 				$scope.markers = markersTemp;
-				tempChart();
 			}
   		}
 

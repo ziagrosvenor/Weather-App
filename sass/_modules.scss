@@ -21,14 +21,6 @@
 	background-color: white;
 }
 
-.bar {
-	display: inline-block;
-	width: 20px;
-	height: 75px; /* Gets overriden by D3-assigned height below */
-	margin-right: 2px;
-	fill: teal;
-}
-
 .ui-column {
 	width: 50%;
 	float: left;
@@ -125,6 +117,27 @@
 		border-right: 2px solid black;
 		padding: 0 0.5rem;
 	}
+}
+
+// Bar chart
+#barchart {
+	width: 400px;
+	height: 300px;
+	margin: 50px auto;
+	background-color: #ddd;
+}
+
+.bar {
+	width: 20px;
+	margin: 1px;
+	display: inline-block;
+}
+
+.axis path, .axis line {
+	fill: none;
+	stroke: #000;
+	stroke-width: 1px;
+	shape-rendering: crispEdges;
 }
 
 // Navigation -----------------------------------------------------------------
