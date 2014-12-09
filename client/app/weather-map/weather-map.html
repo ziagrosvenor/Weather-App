@@ -1,6 +1,7 @@
 
+<!-- Angular Google Maps-->
 <ui-gmap-google-map center="map.center" draggable="true" options="map.options" zoom="map.zoom">
-  <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" doRebuildAll="true">
+  <ui-gmap-markers models="weatherMarkers" coords="'self'" icon="'icon'" doRebuildAll="true">
     <ui-gmap-windows show="show" doRebuildAll="true">
       <div ng-non-bindable="ng-non-bindable" class="info-window">
         <h3>{{location | limitTo: 14}}</h3>
@@ -18,14 +19,11 @@
     </ui-gmap-windows>
   </ui-gmap-markers>
 </ui-gmap-google-map>
-<div class="ui-column">
+<div class="half-column">
   <div class="map-ui">
-    <h3>{{markers[0].date | date: "fullDate"}}</h3>
+    <h3>{{weatherMarkers[0].date | date: "fullDate"}}</h3>
     <div class="ui-slider">
       <input ng-model="period" type="text" id="mySlider1" slider="slider" options="options"/>
     </div>
   </div>
-</div>
-<div class="ui-date ui-column">
-  <h3>{{currentLocation}}</h3>
 </div>

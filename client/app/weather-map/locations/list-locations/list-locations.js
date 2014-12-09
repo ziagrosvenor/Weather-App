@@ -6,27 +6,28 @@ angular.module('locations.list', [
             $scope.weather = data;
         });
 
+        // UI menu items
         $scope.menuItems = [
-        	{title: 'Comments List', sref: 'weatherApp.list'},
-			{title: 'Add a Comment', sref: 'weatherApp.list.create'},
-			{title: 'Sign In', sref: 'weatherApp.signIn'}
+        	{title: 'Local Weather', sref: 'weatherApp.weather'},
+        	{title: 'Locations List', sref: 'weatherApp.weather.list'},
+			{title: 'Info', sref: 'weatherApp.weather.Info'}
 		];
 
+		// Used to store index of weather locations in list view
         $scope.listIndex = 0;
         
+        // Controls cycling through locations list
         $scope.listCycle = function (isNext) {
 			var index = $scope.listIndex;
 
 			if(isNext === true) {
 				if(index != $scope.weather.length - 1) {
-					console.log(index);
 					$scope.listIndex = $scope.listIndex + 1;
 				}
 			}
 
 			else if (isNext === false) {
 				if(index != 0) {
-					console.log(index);
 					$scope.listIndex = $scope.listIndex - 1;
 				}
 			}
@@ -39,6 +40,7 @@ angular.module('locations.list', [
 			}
 		}
     }])
+	// Filter used by locations list
     .filter('slice', function() {
   		return function(arr, start, end) {
    			 return arr.slice(start, end);

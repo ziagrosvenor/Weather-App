@@ -4,7 +4,7 @@
     align-items: stretch;
 }
 
-.comments-list, .weather-map {
+.weather-list, .weather-map {
 	width: 50%;
 	padding: 3rem;
 
@@ -19,12 +19,7 @@
   height: 80%;
 }
 
-.footer {
-  position: fixed;
-  background-color:$base-color;
-  bottom: 0;
-  right: 0;
+.half-column {
   width: 50%;
-  height: 90px;
-  padding-left: 3rem;
+  float: left;
 }

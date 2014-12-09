@@ -21,11 +21,6 @@
 	background-color: white;
 }
 
-.ui-column {
-	width: 50%;
-	float: left;
-}
-
 // Bootstrap tables ------------------------------------------------------------
 // ----------------------------------------------------------------------------
 @import "modules/tables";
@@ -81,20 +76,20 @@
 	color: white;
 }
 
-// Comments/ Locations List view ----------------------------------------------
+// Weather locations list view ----------------------------------------------
 //-----------------------------------------------------------------------------
-.comment-list {
+.weather-item {
 	transition: all 0.1s linear;
 }
 
-.comment-list.ng-enter.ng-enter-active,
-.comment-list.ng-leave {
+.weather-item.ng-enter.ng-enter-active,
+.weather-item.ng-leave {
 	opacity: 1;
 	padding: 1.5rem;
 	height: auto;
 }
 
-.comment-list.ng-leave.ng-leave-active {
+.weather-item.ng-leave.ng-leave-active {
 	opacity: 0;
 	padding: 1.5rem;
 	overflow: hidden;
@@ -124,7 +119,6 @@
 	width: 400px;
 	height: 300px;
 	margin: 50px auto;
-	background-color: #ddd;
 }
 
 .bar {
@@ -142,7 +136,7 @@
 
 // Navigation -----------------------------------------------------------------
 //-----------------------------------------------------------------------------
-.ui-search, .ui-options {
+.ui-search, .ui-menu {
 	width: 320px;
 	height: 80px;
 	position: fixed;
@@ -163,7 +157,7 @@
 	border-bottom: 2px solid rgba(white, 0.5);
 }
 
-.ui-options {
+.ui-menu {
 	top: 80px;
 	ul {
 		width: 240px;

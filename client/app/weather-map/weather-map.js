@@ -4,6 +4,7 @@ angular.module('weather', [
 		'app.models.weather'
 	])
 	.config(function ($stateProvider){
+		// Defines default views
 		$stateProvider
 			.state('weatherApp.weather', {
 				url: '/',
@@ -21,6 +22,7 @@ angular.module('weather', [
 		;
 	})
 	.controller('WeatherMapCtrl', ['$scope', 'weatherFactory' , function ($scope, weatherFactory) {
+		// Configuration for map
 		$scope.map = {
 			center: {
 				latitude: 51.468489,
@@ -30,8 +32,8 @@ angular.module('weather', [
 			options: {scrollwheel: false, optimized: true}
 		};
 
+		// Defines variables on scope used in map and slider
 		$scope.infowindow = false;
-		$scope.markers = [];
 		$scope.value = "1";
 		$scope.options = {
 			from: 0,
@@ -39,17 +41,20 @@ angular.module('weather', [
 			step: 1,
 			round: 1,
 		};
-	
+		
+		// Requests weather data from server 
 		function getWeatherData () {
 			if(!$scope.period) {
 				$scope.period = 1;
 			}
 
 			weatherFactory.getWeather().success( function (data, status, headers, config) {
-    			setWeatherMap(data);
+				// Populates map
+    			populateMap(data);
   			});
 		}
 
+		// Check if value supplied in argument is an even number
 		function isEven(value){
 			if (value%2 === 0)
 				return true;
@@ -57,11 +62,12 @@ angular.module('weather', [
 				return false;
 		}
 
-  		function setWeatherMap (data) {
+		// Loops through weather data and assigns it to scope.weatherMarkers
+  		function populateMap (data) {
 			if(data) {
 				$scope.weather = data;
 			}
-  			$scope.markers = [];
+  			$scope.weatherMarkers = [];
 			var sliderValue = $scope.period;
   			var markersTemp = [];
 			var weatherPeriods = [];
@@ -115,13 +121,16 @@ angular.module('weather', [
 				};
 
 				markersTemp.push(marker);
-				$scope.markers = markersTemp;
+				$scope.weatherMarkers = markersTemp;
 			}
+
+			return $scope.weatherMarkers;
   		}
 
 		getWeatherData();
 
+		// Watches for changes to UI sliders scope, callback updates map
 		$scope.$watch('period', function (newValue, oldValue) {
-			setWeatherMap();
+			populateMap();
 		});
 	}]);

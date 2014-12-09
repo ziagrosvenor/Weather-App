@@ -1,13 +1,12 @@
 
-<div class="ui-controls">
-  <div ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-search menu-animation">
-    <svg ng-click="select = !select" class="ui-icon">
-      <use xlink:href="#search-icon"></use>
-    </svg>
-    <input type="text" ng-model="searchQuery" name="search" placeholder="Search comments" class="border"/>
-  </div>
+<!-- Pop out UI controls display top right-->
+<div ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-search menu-animation">
+  <svg ng-click="select = !select" class="ui-icon">
+    <use xlink:href="#search-icon"></use>
+  </svg>
+  <input type="text" ng-model="searchQuery" name="search" placeholder="Search comments" class="border"/>
 </div>
-<div menu-item="menu-item" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-options menu-animation">
+<div menu-item="menu-item" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-menu menu-animation">
   <ul>
     <li ng-repeat="item in menuItems"><a ui-sref="{{item.sref}}">{{item.title}}</a></li>
   </ul>
@@ -15,8 +14,10 @@
     <use xlink:href="#menu-icon"></use>
   </svg>
 </div>
+<!-- View headline-->
 <h1>Weather near you</h1>
-<article ng-model="localWeather" class="comment-list module-page">
+<!-- Displays data for nearest location to user-->
+<div ng-model="localWeather" class="weather-item module-page">
   <h3 class="heading">{{localWeather.location}}</h3>
   <table class="table">
     <thead>
@@ -42,24 +43,8 @@
         <td>{{ localWeather.period[3].dayTime.temp}} ° c </td>
         <td>{{ localWeather.period[4].dayTime.temp}} ° c</td>
       </tr>
-      <tr> 
-        <td>Wind Direction</td>
-        <td>{{ localWeather.period[0].dayTime.windDir}} </td>
-        <td>{{ localWeather.period[1].dayTime.windDir}} </td>
-        <td>{{ localWeather.period[2].dayTime.windDir}} </td>
-        <td>{{ localWeather.period[3].dayTime.windDir}} </td>
-        <td>{{ localWeather.period[4].dayTime.windDir}}</td>
-      </tr>
-      <tr> 
-        <td>Wind Speed</td>
-        <td>{{ localWeather.period[0].dayTime.windSpeed}} </td>
-        <td>{{ localWeather.period[1].dayTime.windSpeed}} </td>
-        <td>{{ localWeather.period[2].dayTime.windSpeed}} </td>
-        <td>{{ localWeather.period[3].dayTime.windSpeed}} </td>
-        <td>{{ localWeather.period[4].dayTime.windSpeed}}</td>
-      </tr>
     </thead>
   </table>
+  <!-- Rain chance bar chart-->
   <div id="barchart"></div>
-  <p class="comment-content">{{localWeather.dayTime.temp}}</p>
-</article>
+</div>

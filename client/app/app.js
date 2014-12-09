@@ -1,3 +1,4 @@
+// Defines app, requires modules
 var app = angular.module('weatherApp', [
 	'ngResource',
 	'ngRoute',

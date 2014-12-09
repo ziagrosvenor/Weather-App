@@ -426,12 +426,12 @@ address {
           align-items: stretch;
 }
 
-.comments-list, .weather-map {
+.weather-list, .weather-map {
   width: 50%;
   padding: 3rem;
 }
 @media (max-width: 1200px) {
-  .comments-list, .weather-map {
+  .weather-list, .weather-map {
     width: 100%;
     padding: 1rem;
   }
@@ -440,6 +440,11 @@ address {
 .list-container {
   overflow: hidden;
   height: 80%;
+}
+
+.half-column {
+  width: 50%;
+  float: left;
 }
 
 .ui-icon {
@@ -461,11 +466,6 @@ address {
   padding: 1.5rem;
   margin: 1rem 0;
   background-color: white;
-}
-
-.ui-column {
-  width: 50%;
-  float: left;
 }
 
 table {
@@ -994,19 +994,19 @@ input[type="button"].btn-block {
   color: white;
 }
 
-.comment-list {
+.weather-item {
   -webkit-transition: all 0.1s linear;
           transition: all 0.1s linear;
 }
 
-.comment-list.ng-enter.ng-enter-active,
-.comment-list.ng-leave {
+.weather-item.ng-enter.ng-enter-active,
+.weather-item.ng-leave {
   opacity: 1;
   padding: 1.5rem;
   height: auto;
 }
 
-.comment-list.ng-leave.ng-leave-active {
+.weather-item.ng-leave.ng-leave-active {
   opacity: 0;
   padding: 1.5rem;
   overflow: hidden;
@@ -1033,7 +1033,6 @@ input[type="button"].btn-block {
   width: 400px;
   height: 300px;
   margin: 50px auto;
-  background-color: #ddd;
 }
 
 .bar {
@@ -1049,7 +1048,7 @@ input[type="button"].btn-block {
   shape-rendering: crispEdges;
 }
 
-.ui-search, .ui-options {
+.ui-search, .ui-menu {
   width: 320px;
   height: 80px;
   position: fixed;
@@ -1057,11 +1056,11 @@ input[type="button"].btn-block {
   top: 0;
   background-color: #2c3e50;
 }
-.ui-search input, .ui-search ul, .ui-options input, .ui-options ul {
+.ui-search input, .ui-search ul, .ui-menu input, .ui-menu ul {
   float: right;
   padding: 1rem;
 }
-.ui-search input, .ui-options input {
+.ui-search input, .ui-menu input {
   width: 220px;
   margin: 15px 10px;
 }
@@ -1070,20 +1069,20 @@ input[type="button"].btn-block {
   border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-.ui-options {
+.ui-menu {
   top: 80px;
 }
-.ui-options ul {
+.ui-menu ul {
   width: 240px;
   margin-top: -100px;
   padding: 1.5rem;
   background-color: inherit;
 }
-.ui-options ul li {
+.ui-menu ul li {
   font-size: 1.4rem;
   padding: 0.5rem 0;
 }
-.ui-options ul li a {
+.ui-menu ul li a {
   padding: 1rem;
   text-decoration: none;
   color: white;

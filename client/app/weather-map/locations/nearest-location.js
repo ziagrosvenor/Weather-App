@@ -4,6 +4,7 @@ angular.module('weather.locations', [
 	'locations.list'
 	])
 	.config(function ($stateProvider){
+		// Provides route for list locations view
 		$stateProvider
 			.state('weatherApp.weather.list', {
 				url: '/locations',
@@ -17,23 +18,28 @@ angular.module('weather.locations', [
 		;
 	})
 	.controller('nearestLocationCtrl', ['$scope', 'weatherFactory', '$http', '$filter' , function ($scope, weatherFactory, $http, $filter) {
+		// Gets weather data and then calls geo location function
 		weatherFactory.getWeather().success( function (data, status, headers, config) {
     		$scope.weather = data;
     		getGeoLocation();
   		});
 
+		// Menu items
 		$scope.menuItems = [
+			{title: 'Local Weather', sref: 'weatherApp.weather'},
 			{title: 'Locations List', sref: 'weatherApp.weather.list'},
-			{title: 'More Info', sref: 'weatherApp.weather.info'},
-			{title: 'Contact', sref: 'weatherApp.weather.contact'}
+			{title: 'Info', sref: 'weatherApp.weather.info'}
 		];
 
+		// Gets user location
 		function getGeoLocation() {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(findNearest);
 			}
 		}
 
+		// Compares user location to list of possible weather stations
+		// Returns local weather station binded to scope
 		function findNearest(position) {
 			userLocation = {
 				latitude: position.coords.latitude,
@@ -62,10 +68,13 @@ angular.module('weather.locations', [
 			});
 
 			$scope.localWeather = outputLocation;
+
 			makeChart($scope.localWeather);
+
 			return $scope.localWeather;
 		}
 
+		// Creates bar chart with data for a single weather locations
 		function makeChart (dataset) {
 			var days = [];
 			var rainChance = [];
@@ -157,13 +166,11 @@ angular.module('weather.locations', [
 				.attr('height', function (d) {
 					return yScale(d);
 				});
+
+			return svg;
 		}
 	}])
-	.filter('slice', function() {
-  		return function(arr, start, end) {
-   			 return arr.slice(start, end);
-  		};
-	})
+	// Directive handles state of UI controls
 	.directive('menuItem', function () {
         var controller = function ($scope) {
             $scope.active = false;
@@ -175,6 +182,7 @@ angular.module('weather.locations', [
             controller: controller
         };
     })
+    // Reveals UI controls on click
     .animation('.menu-animation', function () {
         return {
             beforeAddClass: function (element, className, done) {

@@ -1,16 +1,18 @@
-.ui-controls
-    .ui-search( class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
+// Pop out UI controls display top right
+.ui-search( class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
         svg(ng-click="select = !select").ui-icon
             use(xlink:href="#search-icon")
         input(type="text" ng-model="searchQuery" class="border" name="search" placeholder="Search comments")
-.ui-options( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
-        ul
-            li(ng-repeat="item in menuItems")
-                a(ui-sref="{{item.sref}}") {{item.title}}
-        svg(ng-click="select = !select").ui-icon
-            use(xlink:href="#menu-icon")
+.ui-menu( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
+    ul
+        li(ng-repeat="item in menuItems")
+            a(ui-sref="{{item.sref}}") {{item.title}}
+    svg(ng-click="select = !select").ui-icon
+        use(xlink:href="#menu-icon")
+// View headline
 h1 Weather near you
-article.comment-list(ng-model="localWeather" class="module-page")
+// Displays data for nearest location to user
+.weather-item(ng-model="localWeather" class="module-page")
     h3.heading {{localWeather.location}}
     table.table
         thead
@@ -39,19 +41,5 @@ article.comment-list(ng-model="localWeather" class="module-page")
                 td {{ localWeather.period[2].dayTime.temp}} ° c 
                 td {{ localWeather.period[3].dayTime.temp}} ° c 
                 td {{ localWeather.period[4].dayTime.temp}} ° c
-            tr 
-                td Wind Direction
-                td {{ localWeather.period[0].dayTime.windDir}} 
-                td {{ localWeather.period[1].dayTime.windDir}} 
-                td {{ localWeather.period[2].dayTime.windDir}} 
-                td {{ localWeather.period[3].dayTime.windDir}} 
-                td {{ localWeather.period[4].dayTime.windDir}}
-            tr 
-                td Wind Speed
-                td {{ localWeather.period[0].dayTime.windSpeed}} 
-                td {{ localWeather.period[1].dayTime.windSpeed}} 
-                td {{ localWeather.period[2].dayTime.windSpeed}} 
-                td {{ localWeather.period[3].dayTime.windSpeed}} 
-                td {{ localWeather.period[4].dayTime.windSpeed}}
+    // Rain chance bar chart
     #barchart
-    p(class="comment-content") {{localWeather.dayTime.temp}}
