@@ -101,7 +101,7 @@ angular.module('weather.locations', [
 				.innerTickSize(1)
 				.outerTickSize(8)
 				.tickPadding(20)
-				.tickFormat(function (d, i) {
+				.tickFormat( function (d, i) {
 					return $filter('date')(periods.days[i], 'EEE');
 				});
 
@@ -111,12 +111,31 @@ angular.module('weather.locations', [
 				.call(xAxis);
 
 			var yScale = d3.scale.linear()
-				.domain([0, d3.max(periods.rainChance) * 1.1])
+				.domain([0, 100])
 				.range([0, h]);
+
+			var yAxisScale = d3.scale.linear()
+				.domain([0, 100])
+				.range([h, 0]);
+
+			var yAxis = d3.svg.axis()
+				.scale(yAxisScale)
+				.orient('left')
+				.ticks(5)
+				.innerTickSize(4)
+				.outerTickSize(8)
+				.tickFormat( function (d) {
+					return d + '%';
+				});
+
+			svg.append('g')
+				.attr('class', 'y axis')
+				.attr('transform', 'translate(0, 0)')
+				.call(yAxis);
 
 			var colorScale = d3.scale.linear()
 				.domain([0, d3.max(periods.rainChance)])
-				.range(['yellow', 'tomato']);
+				.range(['#AAEAFF', '#00C0FF']);
 
 			svg.selectAll('rect')
 				.data(periods.rainChance)
