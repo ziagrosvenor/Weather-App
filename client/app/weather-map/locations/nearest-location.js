@@ -19,6 +19,7 @@ angular.module('weather.locations', [
 	.controller('nearestLocationCtrl', ['$scope', 'weatherFactory', '$http', '$filter' , function ($scope, weatherFactory, $http, $filter) {
 		weatherFactory.getWeather().success( function (data, status, headers, config) {
     		$scope.weather = data;
+    		getGeoLocation();
   		});
 
 		$scope.menuItems = [
@@ -73,6 +74,7 @@ angular.module('weather.locations', [
 			angular.forEach(dataset.period, function (period, i) {
 				days.push(dataset.period[i].date);
 				rainChance.push(dataset.period[i].dayTime.rainChance);
+				console.log(periods);
 			});
 
 			periods.days = days;
@@ -88,17 +90,17 @@ angular.module('weather.locations', [
 				.append('g')
 				.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
-			var xScale = d3.scale.ordinal()
-				.domain(periods.rainChance)
-				.rangeBands([0, w], 0.1, 0.1);
+			var xScale = d3.scale.linear()
+				.domain([0.5, 5.5])
+				.range([0, w]);
 
 			var xAxis = d3.svg.axis()
 				.scale(xScale)
 				.orient('bottom')
 				.ticks(5)
-				.innerTickSize(6)
+				.innerTickSize(1)
 				.outerTickSize(8)
-				.tickPadding(12)
+				.tickPadding(20)
 				.tickFormat(function (d, i) {
 					return $filter('date')(periods.days[i], 'EEE');
 				});
@@ -123,10 +125,10 @@ angular.module('weather.locations', [
 				.attr('class', 'bar')
 				.attr('fill', colorScale)
 				.attr('x', function (d, i) {
-					return xScale(d);
+					return (i * w / 5) + 4;
 				})
 				.attr('y', h)
-				.attr('width', xScale.rangeBand())
+				.attr('width', (w / 5) - 4)
 				.attr('height', 0)
 				.transition()
 				.duration(500)
@@ -137,8 +139,6 @@ angular.module('weather.locations', [
 					return yScale(d);
 				});
 		}
-		getGeoLocation();
-
 	}])
 	.filter('slice', function() {
   		return function(arr, start, end) {
