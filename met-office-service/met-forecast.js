@@ -15,7 +15,7 @@ models.WeatherModel.find( function (err, data) {
 
 // Find all in location model
 models.LocationModel.find( function (err, data) {
-	for(var i = 0; i < 150; i++) {
+	for(var i = 0; i < 250; i++) {
 		var metId = data[i].metId;
 
 		// Get Met of weather forecast for each of the locations
@@ -37,7 +37,7 @@ models.LocationModel.find( function (err, data) {
 					var metLocation = metOfficeData.SiteRep.DV.Location;
 					
 					// Primary JSON object for each location
-					var fiveDayForecast = new db.WeatherModel({
+					var fiveDayForecast = new models.WeatherModel({
 						location: metLocation.name,
 						country: metLocation.country,
 						lat: metLocation.lat,
@@ -74,23 +74,23 @@ models.LocationModel.find( function (err, data) {
 						fiveDayForecast.period.push(oneDayForecast);
 			 		}
 
-			 		// fiveDayForecast.save( function(err) {
-			 		// 	if (err) console.error(err);
-			 		// 	console.log('created');
-			 		// });
+			 		fiveDayForecast.save( function(err) {
+			 			if (err) console.error(err);
+			 			console.log('created');
+			 		});
 
-			 		var upsertData = fiveDayForecast;
+			 		// var upsertData = fiveDayForecast;
                      
-			 		delete upsertData._id;
+			 		// delete upsertData._id;
 
 			 		// Run an update on the weather model in the DB
-			 		models.WeatherModel.findOneAndUpdate({location: fiveDayForecast.location}, upsertData, {upsert: false}, function (err, numCreated) {
-						if (!err) {
-							return console.log(numCreated);
-						} else {
-							return console.log(err);
-						}
-					});
+			 	// 	models.WeatherModel.findOneAndUpdate({location: fiveDayForecast.location}, upsertData, {upsert: false}, function (err, numCreated) {
+					// 	if (!err) {
+					// 		return console.log(numCreated);
+					// 	} else {
+					// 		return console.log(err);
+					// 	}
+					// });
 			});
 			response.on('error', console.error);
 		});

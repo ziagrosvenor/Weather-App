@@ -1,4 +1,4 @@
-// Returns weather data as JSON object form server
+// Returns weather data as JSON object from server
 angular.module('app.models.weather', [])
 	.factory('weatherFactory', function ($http) {
 		return {
