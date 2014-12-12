@@ -14,13 +14,6 @@
 	border-radius: 0.2rem;
 }
 
-.module-page {
-	padding: 1.5rem;
-	margin: 1rem 0;
-	@extend .border;
-	background-color: white;
-}
-
 // Bootstrap tables ------------------------------------------------------------
 // ----------------------------------------------------------------------------
 @import "modules/tables";
@@ -78,22 +71,6 @@
 
 // Weather locations list view ----------------------------------------------
 //-----------------------------------------------------------------------------
-.weather-item {
-	transition: all 0.1s linear;
-}
-
-.weather-item.ng-enter.ng-enter-active,
-.weather-item.ng-leave {
-	opacity: 1;
-	padding: 1.5rem;
-	height: auto;
-}
-
-.weather-item.ng-leave.ng-leave-active {
-	opacity: 0;
-	padding: 1.5rem;
-	overflow: hidden;
-}
 
 .post-content {
   padding: 1rem 0.5rem;
@@ -114,11 +91,20 @@
 	}
 }
 
+.module-page {
+	margin: 2rem 0;
+	padding: 1.5rem;
+	@extend .border;
+	background-color: white;
+}
+
 // Bar chart
 #barchart {
-	width: 400px;
-	height: 300px;
-	margin: 50px auto;
+	width: 300px;
+	height: 200px;
+	margin: 1rem 0 0 0;
+	font-size: 0.8rem;
+	background-color: lighten($background-light, 5%);
 }
 
 .bar {
@@ -132,6 +118,23 @@
 	stroke: #000;
 	stroke-width: 1px;
 	shape-rendering: crispEdges;
+}
+
+.weather-item {
+	transition: all 0.1s linear;
+}
+
+.weather-item.ng-enter.ng-enter-active,
+.weather-item.ng-leave {
+	opacity: 1;
+	padding: 1.5rem;
+	height: auto;
+}
+
+.weather-item.ng-leave.ng-leave-active {
+	opacity: 0;
+	padding: 1.5rem;
+	overflow: hidden;
 }
 
 // Navigation -----------------------------------------------------------------

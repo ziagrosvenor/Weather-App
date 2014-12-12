@@ -90,8 +90,8 @@ angular.module('weather.locations', [
 			periods.rainChance = rainChance;
 
 			var margin = {top: 20, right: 20, bottom: 50, left: 50};
-			var w = 400 - margin.left - margin.right, 
-				h = 300 - margin.top - margin.bottom;
+			var w = 300 - margin.left - margin.right, 
+				h = 200 - margin.top - margin.bottom;
 
 			var svg = d3.select('#barchart').append('svg')
 				.attr('width', w + margin.left + margin.right)
