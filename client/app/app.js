@@ -5,6 +5,7 @@ var app = angular.module('weatherApp', [
 	'ui.router',
 	'ngSlider',
 	'uiGmapgoogle-maps',
+	'donutChart',
 	'weather',
 	'weather.locations'
 ]);

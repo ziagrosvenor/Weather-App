@@ -69,6 +69,51 @@
 	color: white;
 }
 
+.piechart {
+	width: 33%;
+	height: 400px;
+	float: left;
+	text-align: center;
+	color: white;
+
+	h3 {
+		margin-top: -2rem;
+	}
+}
+
+.chart-key {
+	width: 33%;
+	color: white;
+	font-size: 1.2rem;
+	margin-left: 1.5rem;
+	
+	ul li {
+		display: inline-block;
+		padding: 0.2rem 1rem;
+	}
+
+	ul li:first-child {
+		width: 50px;
+		height: 30px;
+	}
+
+	ul:nth-child(1) {
+		li:first-child {
+			background-color: #1f77b4;
+		}
+	}
+	ul:nth-child(2) {
+		li:first-child {
+			background-color: #aec7e8;
+		}
+	}
+	ul:nth-child(3) {
+		li:first-child {
+			background-color: #ff7f0e;
+		}
+	}
+}
+
 // Weather locations list view ----------------------------------------------
 //-----------------------------------------------------------------------------
 
@@ -98,13 +143,22 @@
 	background-color: white;
 }
 
+.chart {
+	margin: 2rem 0 0 0;
+	font-size: 0.8rem;
+
+	h3 {
+		font-size: 1.2rem;
+		font-weight: bold;
+		padding: 1rem;
+	}
+
+}
+
 // Bar chart
 #barchart {
 	width: 300px;
 	height: 200px;
-	margin: 1rem 0 0 0;
-	font-size: 0.8rem;
-	background-color: lighten($background-light, 5%);
 }
 
 .bar {

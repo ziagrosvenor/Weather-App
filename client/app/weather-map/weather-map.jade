@@ -16,3 +16,17 @@ ui-gmap-google-map(center="map.center" draggable="true" options="map.options" zo
 		h3 {{weatherMarkers[0].date | date: "fullDate"}}
 		.ui-slider
 			input(ng-model="period" type="text" id="mySlider1" slider options="options")
+.full-column
+	donut(class="piechart" data="{{weatherMarkers}}" country="england")
+	donut(class="piechart" data="{{weatherMarkers}}" country="wales")
+	donut(class="piechart" data="{{weatherMarkers}}" country="scotland")
+.chart-key
+	ul
+		li
+		li Average Temperature
+	ul
+		li
+		li Rain Chance
+	ul
+		li
+		li Wind Speed
