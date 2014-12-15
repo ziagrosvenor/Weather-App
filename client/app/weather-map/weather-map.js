@@ -41,7 +41,7 @@ angular.module('weatherMapCtrl', [
 				return false;
 		};
 
-		$scope.myDirective = function (data, country) {	
+		$scope.myDirective = function (data, country, doRebuild) {	
 			$scope.$watch('weatherMarkers', function (newValue, oldValue) {
 				var averageTemp = 0;
 				var rainChance = 0;
@@ -70,36 +70,47 @@ angular.module('weatherMapCtrl', [
 				windSpeed = windSpeed / count;
 
 				var averages = [averageTemp, rainChance, windSpeed];
-				makePie(averages, country);
+				makePie(averages, country, doRebuild);
+				$scope.averages = averages;
  			});
 
-			function makePie (data, country) {
-				var width = 300,
-			    height = 300,
-			    radius = Math.min(width, height) / 2;
-
-				var color = d3.scale.category20();
-
-				var pie = d3.layout.pie()
-				    .sort(null);
-
-				var arc = d3.svg.arc()
-				    .innerRadius(radius - 90)
-				    .outerRadius(radius - 50);
-
-				var svg = d3.select("#" + country).append("svg")
-				    .attr("width", width)
-				    .attr("height", height)
-				    .append("g")
-				    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-				var path = svg.selectAll("path")
-				    .data(pie(data))
-				    .enter().append("path")
-				    .attr("fill", function(d, i) { return color(i); })
-				    .attr("d", arc);
-			}
 		};
+		function makePie (data, country, doRebuild) {
+			var width = 300,
+		    height = 300,
+		    radius = Math.min(width, height) / 2;
+
+			var color = d3.scale.category20();
+
+			var pie = d3.layout.pie()
+			    .sort(null);
+
+			var arc = d3.svg.arc()
+			    .innerRadius(radius - 90)
+			    .outerRadius(radius - 50);
+
+			if(doRebuild === true) {
+				d3.select("#" + country).selectAll("svg").remove();
+			}
+			svg = d3.select("#" + country).append("svg")
+			    .attr("width", width)
+			    .attr("height", height)
+			    .append("g")
+			    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+			    var path = svg.selectAll("path")
+			    .data(pie(data))
+			    .enter().append("path")
+			    .attr("fill", function(d, i) { return color(i); })
+			    .attr("d", arc);
+		}
+
+		function updatePie (data) {
+			$scope.myDirective(data, 'england', true);
+			$scope.myDirective(data, 'wales', true);
+			$scope.myDirective(data, 'scotland', true);
+		}
+
 		// // Loops through weather data and assigns it to scope.weatherMarkers
   		function populateMap (data) {
   			if (data)
@@ -179,5 +190,6 @@ angular.module('weatherMapCtrl', [
 		// Watches for changes to UI sliders scope, callback updates map
 		$scope.$watch('period', function (newValue, oldValue) {
 			populateMap();
+			updatePie($scope.weatherMarkers);
 		});
 	}]);

@@ -9,6 +9,6 @@ angular.module("donutChart", [
 			bindToController: true,
 			myDirective: '&',
 			controller: "WeatherMapCtrl as donut",
-			template: "<div ng-init='myDirective(donut.data, donut.country)'><div id='{{donut.country}}'></div><h3>{{donut.country}}</h3></div>"
+			template: "<div ng-init='myDirective(donut.data, donut.country, false)'><div id='{{donut.country}}'></div><h3>{{donut.country}}</h3></div>"
 		}
 	});
