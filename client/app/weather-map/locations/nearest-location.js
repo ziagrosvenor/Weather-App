@@ -2,7 +2,6 @@ angular.module('nearestLocationCtrl', [
 	])
 	.controller('nearestLocationCtrl', ['$scope', 'weatherFactory', '$http', '$filter' , function ($scope, weatherFactory, $http, $filter) {
 		// Gets weather data and then calls geo location function
-
   		$http.get('/api/weather/').success(function (data) {
 			$scope.weather = data;
     		getGeoLocation();

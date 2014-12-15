@@ -36,10 +36,12 @@ h1 Weather near you
                     img(ng-src="/assets/weather-icons/w{{ localWeather.period[4].dayTime.weatherType}}.png")
             tr 
                 td Temp
-                td {{ localWeather.period[0].dayTime.temp}} ° c 
-                td {{ localWeather.period[1].dayTime.temp}} ° c 
-                td {{ localWeather.period[2].dayTime.temp}} ° c 
-                td {{ localWeather.period[3].dayTime.temp}} ° c 
-                td {{ localWeather.period[4].dayTime.temp}} ° c
+                td {{localWeather.period[0].dayTime.temp}} ° c 
+                td {{localWeather.period[1].dayTime.temp}} ° c 
+                td {{localWeather.period[2].dayTime.temp}} ° c 
+                td {{localWeather.period[3].dayTime.temp}} ° c 
+                td {{localWeather.period[4].dayTime.temp}} ° c
     // Rain chance bar chart
-    #barchart
+    .chart
+        h3 Chance of Rain
+        #barchart

@@ -37,14 +37,17 @@
       </tr>
       <tr> 
         <td>Temp</td>
-        <td>{{ localWeather.period[0].dayTime.temp}} ° c </td>
-        <td>{{ localWeather.period[1].dayTime.temp}} ° c </td>
-        <td>{{ localWeather.period[2].dayTime.temp}} ° c </td>
-        <td>{{ localWeather.period[3].dayTime.temp}} ° c </td>
-        <td>{{ localWeather.period[4].dayTime.temp}} ° c</td>
+        <td>{{localWeather.period[0].dayTime.temp}} ° c </td>
+        <td>{{localWeather.period[1].dayTime.temp}} ° c </td>
+        <td>{{localWeather.period[2].dayTime.temp}} ° c </td>
+        <td>{{localWeather.period[3].dayTime.temp}} ° c </td>
+        <td>{{localWeather.period[4].dayTime.temp}} ° c</td>
       </tr>
     </thead>
   </table>
   <!-- Rain chance bar chart-->
-  <div id="barchart"></div>
+  <div class="chart">
+    <h3>Chance of Rain</h3>
+    <div id="barchart"></div>
+  </div>
 </div>

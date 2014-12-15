@@ -1,7 +1,7 @@
 // Require modules
 var http = require('http');
-var Database = require('../server/models/database.js');
-var bindModels = require('../server/models/bind-models.js');
+var Database = require('../components/models/database.js');
+var bindModels = require('../components/models/bind-models.js');
 
 // Instantiate + config database
 var db = Database();
