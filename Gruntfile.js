@@ -49,6 +49,9 @@ module.exports = function(grunt) {
         livereload: 35729
       },
 
+      index: {
+        files: './client/index.jade'
+      },
       scripts: {
         files: ['./client/app/weather-map/*.js', './client/app/weather-map/locations/*.js','app.js'],
         tasks: ['jshint'],
