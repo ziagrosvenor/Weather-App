@@ -1,28 +1,12 @@
-angular.module('weather.locations', [
-	'ngAnimate',
-	'app.models.weather',
-	'locations.list'
+angular.module('nearestLocationCtrl', [
 	])
-	.config(function ($stateProvider){
-		// Provides route for list locations view
-		$stateProvider
-			.state('weatherApp.weather.list', {
-				url: '/locations',
-				views: {
-					'locations@' : {
-						controller: 'ListLocationsCtrl',
-						templateUrl: '/app/weather-map/locations/list-locations/list-locations.html'
-					}
-				}
-			})
-		;
-	})
 	.controller('nearestLocationCtrl', ['$scope', 'weatherFactory', '$http', '$filter' , function ($scope, weatherFactory, $http, $filter) {
 		// Gets weather data and then calls geo location function
-		weatherFactory.getWeather().success( function (data, status, headers, config) {
-    		$scope.weather = data;
+
+  		$http.get('/api/weather/').success(function (data) {
+			$scope.weather = data;
     		getGeoLocation();
-  		});
+		});
 
 		// Menu items
 		$scope.menuItems = [
@@ -34,13 +18,13 @@ angular.module('weather.locations', [
 		// Gets user location
 		function getGeoLocation() {
 			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(findNearest);
+				navigator.geolocation.getCurrentPosition($scope.findNearest);
 			}
 		}
 
 		// Compares user location to list of possible weather stations
 		// Returns local weather station binded to scope
-		function findNearest(position) {
+		$scope.findNearest = function (position) {
 			userLocation = {
 				latitude: position.coords.latitude,
 				longitude: position.coords.longitude
@@ -68,14 +52,14 @@ angular.module('weather.locations', [
 			});
 
 			$scope.localWeather = outputLocation;
-
-			makeChart($scope.localWeather);
+			console.log(JSON.stringify($scope.localWeather));
+			$scope.makeChart($scope.localWeather);
 
 			return $scope.localWeather;
-		}
+		};
 
 		// Creates bar chart with data for a single weather locations
-		function makeChart (dataset) {
+		$scope.makeChart = function  (dataset) {
 			var days = [];
 			var rainChance = [];
 			var periods = {};
@@ -168,7 +152,7 @@ angular.module('weather.locations', [
 				});
 
 			return svg;
-		}
+		};
 	}])
 	// Directive handles state of UI controls
 	.directive('menuItem', function () {

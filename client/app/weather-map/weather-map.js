@@ -1,27 +1,6 @@
-angular.module('weather', [
-		'ngSlider', 
-		'uiGmapgoogle-maps',
-		'app.models.weather'
+angular.module('weatherMapCtrl', [
 	])
-	.config(function ($stateProvider){
-		// Defines default views
-		$stateProvider
-			.state('weatherApp.weather', {
-				url: '/',
-				views: {
-					'weather-map@': {
-						controller: 'WeatherMapCtrl',
-						templateUrl: '/app/weather-map/weather-map.html'
-					},
-					'locations@': {
-						controller: 'nearestLocationCtrl',
-						templateUrl: '/app/weather-map/locations/nearest-location.html'
-					}
-				}
-			})
-		;
-	})
-	.controller('WeatherMapCtrl', ['$scope', 'weatherFactory' , function ($scope, weatherFactory) {
+	.controller('WeatherMapCtrl', ['$scope', '$http' , function ($scope, $http) {
 		// Configuration for map
 		$scope.map = {
 			center: {
@@ -41,32 +20,30 @@ angular.module('weather', [
 			step: 1,
 			round: 1,
 		};
+		$scope.period = 1;
 		
+		$scope.weather = {};
+
 		// Requests weather data from server 
 		function getWeatherData () {
-			if(!$scope.period) {
-				$scope.period = 1;
-			}
-
-			weatherFactory.getWeather().success( function (data, status, headers, config) {
-				// Populates map
-    			populateMap(data);
-  			});
+			$http.get('/api/weather/').success(function (data) {
+				 populateMap(data);
+			});
 		}
 
-		// Check if value supplied in argument is an even number
-		function isEven(value){
+		// // Check if value supplied in argument is an even number
+		$scope.isEven = function (value){
 			if (value%2 === 0)
 				return true;
 			else
 				return false;
-		}
+		};
 
-		// Loops through weather data and assigns it to scope.weatherMarkers
+		// // Loops through weather data and assigns it to scope.weatherMarkers
   		function populateMap (data) {
-			if(data) {
-				$scope.weather = data;
-			}
+  			if (data)
+  				$scope.weather = data;
+			var isEven = $scope.isEven;
   			$scope.weatherMarkers = [];
 			var sliderValue = $scope.period;
   			var markersTemp = [];

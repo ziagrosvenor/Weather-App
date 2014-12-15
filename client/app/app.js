@@ -4,9 +4,9 @@ var app = angular.module('weatherApp', [
 	'ngRoute',
 	'ui.router',
 	'ngSlider',
+	'uiGmapgoogle-maps',
 	'weather',
-	'weather.locations',
-	'uiGmapgoogle-maps'
+	'weather.locations'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
