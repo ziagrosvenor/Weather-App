@@ -35,5 +35,5 @@ module.exports = function (Schema) {
 	return {
 		WeatherSchema: WeatherSchema,
 		LocationSchema: LocationSchema
-	}
-}
+	};
+};

@@ -7,5 +7,5 @@ module.exports = function (db) {
 	return {
 		LocationModel : db.model('MetData', WeatherSchemas.LocationSchema),
 		WeatherModel : db.model('WeatherData', WeatherSchemas.WeatherSchema)
-	}
-}
+	};
+};

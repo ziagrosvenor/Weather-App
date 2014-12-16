@@ -25,7 +25,13 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-        target: ['./client/app/weather-map/*.js', './client/app/weather-map/*/*.js', 'app.js', 'Gruntfile.js']
+        target: ['./client/*.js', 
+                './client/app/*.js',
+                './client/app/**/**.js',
+                './components/*/*.js',
+                'server.js',
+                'app.js', 
+                'Gruntfile.js']
     },
 
     jade: {
@@ -49,11 +55,8 @@ module.exports = function(grunt) {
         livereload: 35729
       },
 
-      index: {
-        files: './client/index.jade'
-      },
       scripts: {
-        files: ['./client/app/weather-map/*.js', './client/app/weather-map/locations/*.js','app.js'],
+        files: ['./client/app/**/*.js', './client/app/*.js', './components/**/*.js', 'app.js', 'server.js'],
         tasks: ['jshint'],
         options: {
           event: ['added', 'changed'],
@@ -71,9 +74,10 @@ module.exports = function(grunt) {
       },
 
       jade: {
-        files: ['./client/app/weather-map/locations/*.jade',
-                './client/app/weather-map/locations/*/*.jade',
-                './client/app/weather-map/*.jade'],
+        files: ['./client/app/*/*.jade',
+                './client/app/*/*/*.jade',
+                './client/app/*/*/*/*.jade',
+                './client/index.jade'],
         tasks: ['jade'],
       }
     }
