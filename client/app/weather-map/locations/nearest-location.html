@@ -8,7 +8,7 @@
 </div>
 <div menu-item="menu-item" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-menu menu-animation">
   <ul>
-    <li ng-repeat="item in menuItems"><a ui-sref="{{item.sref}}">{{item.title}}</a></li>
+    <li ng-repeat="item in menuItems"><a ui-sref="{{::item.sref}}">{{::item.title}}</a></li>
   </ul>
   <svg ng-click="select = !select" class="ui-icon">
     <use xlink:href="#menu-icon"></use>
@@ -18,30 +18,22 @@
 <h1>Weather near you</h1>
 <!-- Displays data for nearest location to user-->
 <div ng-model="localWeather" class="weather-item module-page">
-  <h3 class="heading">{{localWeather.location}}</h3>
+  <h3 class="heading">{{::localWeather.location}}</h3>
   <table class="table">
     <thead>
       <th></th>
-      <th>{{ localWeather.period[0].date | date: 'EEE'}}</th>
-      <th>{{ localWeather.period[1].date | date: 'EEE'}}</th>
-      <th>{{ localWeather.period[2].date | date: 'EEE'}}</th>
-      <th>{{ localWeather.period[3].date | date: 'EEE'}}</th>
-      <th>{{ localWeather.period[4].date | date: 'EEE'}}</th>
+      <th>{{::localWeather.period[0].date | date: 'EEE'}}</th>
+      <th>{{::localWeather.period[1].date | date: 'EEE'}}</th>
+      <th>{{::localWeather.period[2].date | date: 'EEE'}}</th>
+      <th>{{::localWeather.period[3].date | date: 'EEE'}}</th>
+      <th>{{::localWeather.period[4].date | date: 'EEE'}}</th>
       <tr> 
         <td>Daytime Weather</td>
-        <td><img ng-src="/assets/weather-icons/w{{ localWeather.period[0].dayTime.weatherType}}.png"/></td>
-        <td><img ng-src="/assets/weather-icons/w{{ localWeather.period[1].dayTime.weatherType}}.png"/></td>
-        <td><img ng-src="/assets/weather-icons/w{{ localWeather.period[2].dayTime.weatherType}}.png"/></td>
-        <td><img ng-src="/assets/weather-icons/w{{ localWeather.period[3].dayTime.weatherType}}.png"/></td>
-        <td><img ng-src="/assets/weather-icons/w{{ localWeather.period[4].dayTime.weatherType}}.png"/></td>
-      </tr>
-      <tr> 
-        <td>Temp</td>
-        <td>{{localWeather.period[0].dayTime.temp}} ° c </td>
-        <td>{{localWeather.period[1].dayTime.temp}} ° c </td>
-        <td>{{localWeather.period[2].dayTime.temp}} ° c </td>
-        <td>{{localWeather.period[3].dayTime.temp}} ° c </td>
-        <td>{{localWeather.period[4].dayTime.temp}} ° c</td>
+        <td><img ng-src="/assets/weather-icons/w{{::localWeather.period[0].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::localWeather.period[1].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::localWeather.period[2].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::localWeather.period[3].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::localWeather.period[4].dayTime.weatherType}}.png"/></td>
       </tr>
     </thead>
   </table>

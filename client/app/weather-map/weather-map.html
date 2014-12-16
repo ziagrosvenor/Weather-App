@@ -4,13 +4,13 @@
   <ui-gmap-markers models="weatherMarkers" coords="'self'" icon="'icon'" doRebuildAll="true">
     <ui-gmap-windows show="show" doRebuildAll="true">
       <div ng-non-bindable="ng-non-bindable" class="info-window">
-        <h3>{{location | limitTo: 14}}</h3>
+        <h3>{{::location | limitTo: 14}}</h3>
         <table class="table">
           <thead>
-            <th>{{ date | date: 'EEEE d'}}	</th>
+            <th>{{::date | date: 'EEEE d'}}	</th>
             <tr> 
-              <td> <img src="{{icon}}"/>
-                <div class="weather-map-temp">{{temp}} c					</div>
+              <td> <img src="{{::icon}}"/>
+                <div class="weather-map-temp">{{::temp}} c					</div>
               </td>
             </tr>
           </thead>
@@ -22,15 +22,16 @@
 <div class="half-column">
   <div class="map-ui">
     <h3>{{weatherMarkers[0].date | date: "fullDate"}}</h3>
+    <h4>{{weatherMarkers[0].time}}</h4>
     <div class="ui-slider">
       <input ng-model="period" type="text" id="mySlider1" slider="slider" options="options"/>
     </div>
   </div>
 </div>
 <div class="full-column">
-  <donut data="{{weatherMarkers}}" country="england" class="piechart"></donut>
-  <donut data="{{weatherMarkers}}" country="wales" class="piechart"></donut>
-  <donut data="{{weatherMarkers}}" country="scotland" class="piechart"></donut>
+  <donut data="{{::weatherMarkers}}" country="england" class="piechart"></donut>
+  <donut data="{{::weatherMarkers}}" country="wales" class="piechart"></donut>
+  <donut data="{{::weatherMarkers}}" country="scotland" class="piechart"></donut>
 </div>
 <div class="chart-key">
   <ul>

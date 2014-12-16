@@ -3,23 +3,24 @@ ui-gmap-google-map(center="map.center" draggable="true" options="map.options" zo
 	ui-gmap-markers(models="weatherMarkers" coords="'self'" icon="'icon'" doRebuildAll="true")
 		ui-gmap-windows(show="show" doRebuildAll="true")
 			div(class="info-window" ng-non-bindable)
-				h3 {{location | limitTo: 14}}
+				h3 {{::location | limitTo: 14}}
 				table.table
 					thead
-						th {{ date | date: 'EEEE d'}}	
+						th {{::date | date: 'EEEE d'}}	
 						tr 
 							td 
-								img(src="{{icon}}")
-								.weather-map-temp {{temp}} c					
+								img(src="{{::icon}}")
+								.weather-map-temp {{::temp}} c					
 .half-column
 	.map-ui
 		h3 {{weatherMarkers[0].date | date: "fullDate"}}
+		h4 {{weatherMarkers[0].time}}
 		.ui-slider
 			input(ng-model="period" type="text" id="mySlider1" slider options="options")
 .full-column
-	donut(class="piechart" data="{{weatherMarkers}}" country="england")
-	donut(class="piechart" data="{{weatherMarkers}}" country="wales")
-	donut(class="piechart" data="{{weatherMarkers}}" country="scotland")
+	donut(class="piechart" data="{{::weatherMarkers}}" country="england")
+	donut(class="piechart" data="{{::weatherMarkers}}" country="wales")
+	donut(class="piechart" data="{{::weatherMarkers}}" country="scotland")
 .chart-key
 	ul
 		li

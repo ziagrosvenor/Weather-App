@@ -8,7 +8,7 @@
 </div>
 <div menu-item="menu-item" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false" class="ui-menu menu-animation">
   <ul>
-    <li ng-repeat="item in menuItems"><a ui-sref="{{item.sref}}">{{item.title}}</a></li>
+    <li ng-repeat="item in menuItems"><a ui-sref="{{::item.sref}}">{{item.title}}</a></li>
   </ul>
   <svg ng-click="select = !select" class="ui-icon">
     <use xlink:href="#menu-icon"></use>
@@ -19,34 +19,34 @@
 <!-- Module for displaying each locations weather data in-->
 <div ng-animate="'animate'" ng-repeat="weatherLocation in weather | filter:searchQuery | slice:listIndex:listIndexMax" class="weather-item module-page">
   <label class="list-select">
-    <h3 class="heading">{{weatherLocation.location}}</h3>
+    <h3 class="heading">{{::weatherLocation.location}}</h3>
   </label>
   <table class="table">
     <thead>
       <!-- Name of each day in forecast-->
       <th></th>
-      <th>{{ weatherLocation.period[0].date | date: 'EEE'}}</th>
-      <th>{{ weatherLocation.period[1].date | date: 'EEE'}}</th>
-      <th>{{ weatherLocation.period[2].date | date: 'EEE'}}</th>
-      <th>{{ weatherLocation.period[3].date | date: 'EEE'}}</th>
-      <th>{{ weatherLocation.period[4].date | date: 'EEE'}}</th>
+      <th>{{::weatherLocation.period[0].date | date: 'EEE'}}</th>
+      <th>{{::weatherLocation.period[1].date | date: 'EEE'}}</th>
+      <th>{{::weatherLocation.period[2].date | date: 'EEE'}}</th>
+      <th>{{::weatherLocation.period[3].date | date: 'EEE'}}</th>
+      <th>{{::weatherLocation.period[4].date | date: 'EEE'}}</th>
       <!-- Weather conditions icons-->
       <tr> 
         <td>weather</td>
-        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[0].dayTime.weatherType}}.png"/></td>
-        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[1].dayTime.weatherType}}.png"/></td>
-        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[2].dayTime.weatherType}}.png"/></td>
-        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[3].dayTime.weatherType}}.png"/></td>
-        <td><img ng-src="/assets/weather-icons/w{{ weatherLocation.period[4].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::weatherLocation.period[0].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::weatherLocation.period[1].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::weatherLocation.period[2].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::weatherLocation.period[3].dayTime.weatherType}}.png"/></td>
+        <td><img ng-src="/assets/weather-icons/w{{::weatherLocation.period[4].dayTime.weatherType}}.png"/></td>
       </tr>
       <!-- Temperature-->
       <tr> 
         <td>temp</td>
-        <td>{{ weatherLocation.period[0].dayTime.temp}} ° c </td>
-        <td>{{ weatherLocation.period[1].dayTime.temp}} ° c </td>
-        <td>{{ weatherLocation.period[2].dayTime.temp}} ° c </td>
-        <td>{{ weatherLocation.period[3].dayTime.temp}} ° c </td>
-        <td>{{ weatherLocation.period[4].dayTime.temp}} ° c</td>
+        <td>{{::weatherLocation.period[0].dayTime.temp}} ° c </td>
+        <td>{{::weatherLocation.period[1].dayTime.temp}} ° c </td>
+        <td>{{::weatherLocation.period[2].dayTime.temp}} ° c </td>
+        <td>{{::weatherLocation.period[3].dayTime.temp}} ° c </td>
+        <td>{{::weatherLocation.period[4].dayTime.temp}} ° c</td>
       </tr>
     </thead>
   </table>

@@ -6,41 +6,34 @@
 .ui-menu( menu-item class="menu-animation" ng-class="{'highlight':active, 'selected':select}" ng-mouseenter="active = true" ng-mouseleave="active = false")
     ul
         li(ng-repeat="item in menuItems")
-            a(ui-sref="{{item.sref}}") {{item.title}}
+            a(ui-sref="{{::item.sref}}") {{::item.title}}
     svg(ng-click="select = !select").ui-icon
         use(xlink:href="#menu-icon")
 // View headline
 h1 Weather near you
 // Displays data for nearest location to user
 .weather-item(ng-model="localWeather" class="module-page")
-    h3.heading {{localWeather.location}}
+    h3.heading {{::localWeather.location}}
     table.table
         thead
             th
-            th {{ localWeather.period[0].date | date: 'EEE'}}
-            th {{ localWeather.period[1].date | date: 'EEE'}}
-            th {{ localWeather.period[2].date | date: 'EEE'}}
-            th {{ localWeather.period[3].date | date: 'EEE'}}
-            th {{ localWeather.period[4].date | date: 'EEE'}}
+            th {{::localWeather.period[0].date | date: 'EEE'}}
+            th {{::localWeather.period[1].date | date: 'EEE'}}
+            th {{::localWeather.period[2].date | date: 'EEE'}}
+            th {{::localWeather.period[3].date | date: 'EEE'}}
+            th {{::localWeather.period[4].date | date: 'EEE'}}
             tr 
                 td Daytime Weather
                 td
-                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[0].dayTime.weatherType}}.png") 
+                    img(ng-src="/assets/weather-icons/w{{::localWeather.period[0].dayTime.weatherType}}.png") 
                 td
-                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[1].dayTime.weatherType}}.png")
+                    img(ng-src="/assets/weather-icons/w{{::localWeather.period[1].dayTime.weatherType}}.png")
                 td
-                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[2].dayTime.weatherType}}.png")
+                    img(ng-src="/assets/weather-icons/w{{::localWeather.period[2].dayTime.weatherType}}.png")
                 td
-                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[3].dayTime.weatherType}}.png")
+                    img(ng-src="/assets/weather-icons/w{{::localWeather.period[3].dayTime.weatherType}}.png")
                 td
-                    img(ng-src="/assets/weather-icons/w{{ localWeather.period[4].dayTime.weatherType}}.png")
-            tr 
-                td Temp
-                td {{localWeather.period[0].dayTime.temp}} ° c 
-                td {{localWeather.period[1].dayTime.temp}} ° c 
-                td {{localWeather.period[2].dayTime.temp}} ° c 
-                td {{localWeather.period[3].dayTime.temp}} ° c 
-                td {{localWeather.period[4].dayTime.temp}} ° c
+                    img(ng-src="/assets/weather-icons/w{{::localWeather.period[4].dayTime.weatherType}}.png")
     // Rain chance bar chart
     .chart
         h3 Chance of Rain
